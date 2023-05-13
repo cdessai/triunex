@@ -11,7 +11,7 @@ use Drupal\Core\Url;
  *
  * @ingroup triune
  */
-class JobRateDeleteForm extends ContentEntityConfirmFormBase
+class PayrollDeleteForm extends ContentEntityConfirmFormBase
 {
     
     /**
@@ -29,7 +29,7 @@ class JobRateDeleteForm extends ContentEntityConfirmFormBase
      */
     public function getCancelURL()
     {
-        return new Url('triune.entity.jobrate.collection');
+        return new Url('triune.entity.payroll.collection');
     }
     
     /**
@@ -57,7 +57,7 @@ class JobRateDeleteForm extends ContentEntityConfirmFormBase
             '%title' => $this->entity->label(),
             )
         );
-        $form_state->setRedirect('triune.entity.jobrate.collection');
+        $form_state->setRedirect('triune.entity.payroll.collection');
     }
 }
 ?>

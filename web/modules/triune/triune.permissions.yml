@@ -18,3 +18,12 @@ edit_customers:
 
 edit_employees:
   title: 'Edit Employees'
+
+edit_payroll:
+  title: 'Edit Payroll'
+
+delete_payroll:
+  title: 'Delete Payroll'
+
+administer_payroll:
+  title: 'Administer Payroll'

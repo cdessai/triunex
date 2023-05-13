@@ -1,6 +1,6 @@
 <?php
 /**
- * @file Contains \Drupal\triune\Entity\JobRateInterface
+ * @file Contains \Drupal\triune\Entity\PayrollInterface
  */
 namespace Drupal\triune\Entity;
 
@@ -8,13 +8,12 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityChangedInterface;
 use Drupal\user\EntityOwnerInterface;
 
-interface JobRateInterface extends ContentEntityInterface, EntityOwnerInterface, EntityChangedInterface
+interface PayrollInterface extends ContentEntityInterface, EntityOwnerInterface, EntityChangedInterface
 {
     /**
-     * Gets the JobRate value.
+     * Gets the Payroll value.
      *
      * @return string
      */
-    public function getJobRate();
+    public function getPayroll();
 }
-?>

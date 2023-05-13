@@ -341,7 +341,22 @@ function triune_theme($existing, $type, $theme, $path) {
       ),
       'option' => [],
       'render element' => 'form'
-		],
+    ],
+    'payroll_list' => [
+        'variables' => [
+            'items' => [],
+        ],
+    ],
+    'payroll_view' => [
+      'variables' => [
+          'payroll' => NULL,
+      ],
+    ],
+    'payroll_delete' => [
+      'variables' => [
+          'payroll_id' => NULL,
+      ],
+    ],
   ];
 }
 
@@ -372,7 +387,7 @@ function triune_form_alter(&$form, FormStateInterface &$form_state,$form_id) {
     // Automatically add ID attribute for each form element
     foreach ($form as $key => $frm) {
         if ( stristr($key, 'field_' ) ) {
-            $form[$key]['#id'] = $key; 
+            $form[$key]['#id'] = $key;
         }
     }
 }

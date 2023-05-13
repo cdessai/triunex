@@ -1,0 +1,9 @@
+<ul>
+    <li>ID: {{ payroll.id() }}</li>
+    <li>Created: {{ payroll.created.value|date('Y-m-d H:i:s') }}</li>
+    <li>Last changed: {{ payroll.changed.value|date('Y-m-d H:i:s') }}</li>
+    <li>Customer ID: {{ payroll.customer_id.target_id }}</li>
+    <li>Date: {{ payroll.date.value }}</li>
+    <li>Rate: {{ payroll.rate.value }}</li>
+</ul>
+<p><a href="/triune/payroll/list">Back to Payroll list</a></p>

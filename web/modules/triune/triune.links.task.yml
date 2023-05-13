@@ -32,3 +32,8 @@ entity.triune_order_employee.collection_tab:
   route_name: entity.triune_order_employee.collection
   base_route: system.admin_content
   title: 'Order Employees'
+
+entity.triune_payroll.collection_tab:
+  route_name: entity.triune_payroll.collection
+  base_route: system.admin_content
+  title: 'Payroll'

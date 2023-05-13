@@ -79,10 +79,10 @@ reports:
     - core/jquery.once
     - triune/jquery.tablesorter
 
-jobrate:
+payroll:
   version: 8.7.1
   js:
-    assets/js/jobrate.js: {}
+    assets/js/payroll.js: {}
   dependencies:
     - core/jquery
     - core/drupal.ajax
