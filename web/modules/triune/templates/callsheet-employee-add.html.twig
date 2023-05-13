@@ -1,0 +1,139 @@
+{{ attach_library('triune/callsheet_employee') }}
+
+<div {{ attributes }}>
+  
+  <div class="order-details">
+    <h3>Add Resources to Call Sheet</h3>
+  </div>
+  
+  <form class="views-exposed-form" id="form-filter-employee-add" action="/triune/callsheet/{{ callsheet_id }}/employee/add" method="get" accept-charset="UTF-8">
+  <div class="form--inline clearfix">
+    <div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-employee-id form-item-employee-id">
+      <label for="edit-employee-id">Employee ID</label>
+        <input data-drupal-selector="edit-employee-id" type="text" id="edit-employee-id" name="employee-id" value="{{ variables.condition.resource_id }}" size="30" maxlength="128" class="form-text">
+    </div>
+    <div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-first-name form-item-first-name">
+      <label for="edit-first-name">First Name</label>
+        <input data-drupal-selector="edit-first-name" type="text" id="edit-first-name" name="first-name" value="{{ variables.condition.first_name }}" size="30" maxlength="128" class="form-text">
+    </div>
+    <div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-last-name form-item-last-name">
+      <label for="edit-last-name">Last Name</label>
+        <input data-drupal-selector="edit-last-name" type="text" id="edit-last-name" name="last-name" value="{{ variables.condition.last_name }}" size="30" maxlength="128" class="form-text">
+    </div>
+    <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-customer form-item-customer">
+      <label for="edit-customer">Work History</label>
+        <select data-drupal-selector="edit-customer" id="edit-customer" name="customer" class="form-select">
+          <option value="0"{% if variables.condition.customer_id == 0 %} selected="selected"{% endif %}>- Any -</option>
+          {% for customer in variables.customers %}
+          <option value="{{ customer.id }}"{% if variables.condition.customer_id == customer.id %} selected="selected"{% endif %}>{{ customer.label }}</option>
+          {% endfor %}
+        </select>
+    </div>
+    <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-job form-item-job">
+      <label for="edit-job">Job Category</label>
+        <select data-drupal-selector="edit-job" id="edit-job" name="job" class="form-select">
+          <option value="0"{% if variables.condition.job == 0 %} selected="selected"{% endif %}>- Any -</option>
+          <option value="40"{% if variables.condition.job == 40 %} selected="selected"{% endif %}>General Labor</option>
+        </select>
+    </div>
+    <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-driver form-item-driver">
+      <label for="edit-driver">Driver</label>
+        <select data-drupal-selector="edit-driver" id="edit-driver" name="driver" class="form-select">
+          <option value="0"{% if variables.condition.driver != 1 %} selected="selected"{% endif %}>- Any -</option>
+          <option value="1"{% if variables.condition.driver == 1 %} selected="selected"{% endif %}>Yes</option>
+        </select>
+    </div>
+    {% if variables.office_access %}
+    <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-office form-item-office">
+      <label for="edit-office">Office</label>
+        <select data-drupal-selector="edit-office" id="edit-office" name="office" class="form-select">
+        {% for location in variables.location_list %}
+          <option value="{{ location.location_id }}"{% if variables.condition.location_id == location.location_id %} selected="selected"{% endif %}>{{ location.label }}</option>
+        {% endfor %}
+        </select>
+    </div>
+    {% endif %}
+    <div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
+      <input data-drupal-selector="edit-submit-content" type="submit" id="edit-submit-content" value="Filter" class="button js-form-submit form-submit">
+      <input data-drupal-selector="edit-reset" type="submit" id="edit-reset" name="op" value="Reset" class="button js-form-submit form-submit">
+    </div>
+  </div>
+  </form>
+  
+  
+  <form action="{{ variables.route }}" method="post" id="call-sheet-employee-add-form" accept-charset="UTF-8">
+    {{ form.callsheet_id }}
+    
+    <div class="config-row buttons">
+      <div class="button-back app-links view-links" style="float:left">
+        <a href="/triune/callsheet/{{ callsheet_id }}/view">Cancel</a>
+      </div>
+      {{ form.submit }}
+      <div class="side-area" style="float:right">
+        {% if variables.condition.page != 0 %}
+        <a href="/triune/callsheet/{{ callsheet_id }}/employee/add?{{ variables.queries }}page={{ variables.condition.page - 1 }}">Prev</a>&nbsp;|&nbsp;
+        {% endif %}
+        <strong>Page {{ variables.condition.page + 1 }}</strong>
+        {% if not variables.lastpage %}
+        &nbsp;|&nbsp;<a href="/triune/callsheet/{{ callsheet_id }}/employee/add?{{ variables.queries }}page={{ variables.condition.page + 1 }}">Next</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <table id="msortTable" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th></th>
+        <th specifier="employee_id">Employee ID</th>
+        <th specifier="name">Employee Name</th>
+        <th specifier="office">Office</th>
+        <th specifier="customer">Work History</th>
+        <th specifier="job">Job Category</th>
+        <th specifier="driver">Driver</th>
+        <th specifier="phone">Phone #</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+    {% for key, employee in employee_list %}
+    <tr>
+      <td>{{ form.employees[key] }}</td>
+      <td>{{ employee.resource_id }}</td>
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.office }}</td>
+      <td>{{ employee.customer }}</td>
+      <td>{{ employee.job }}</td>
+      <td>{{ employee.driver }}</td>
+      <td>{{ employee.phone }}</td>
+    </tr>
+    {% endfor %}
+    
+    </tbody>
+  </table>
+    
+  <div class="config-row buttons">
+    <div class="button-back app-links view-links" style="float:left">
+      <a href="/triune/callsheet/{{ callsheet_id }}/view">Cancel</a>
+    </div>
+    {{ form.submit }}
+
+    <div class="side-area" style="float:right">
+      {% if variables.condition.page != 0 %}
+      <a href="/triune/callsheet/{{ callsheet_id }}/employee/add?{{ variables.queries }}page={{ variables.condition.page - 1 }}">Prev</a>&nbsp;|&nbsp;
+      {% endif %}
+      <strong>Page {{ variables.condition.page + 1 }}</strong>
+      {% if not variables.lastpage %}
+      &nbsp;|&nbsp;<a href="/triune/callsheet/{{ callsheet_id }}/employee/add?{{ variables.queries }}page={{ variables.condition.page + 1 }}">Next</a>
+      {% endif %}
+    </div>
+  </div>
+  {{ form.actions.submit }}
+  {{ form.form_build_id }}
+  {{ form.form_token }}
+  {{ form.form_id }}
+  </form>
+  
+</div>
+
+
+

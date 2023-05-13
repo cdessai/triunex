@@ -1,0 +1,35 @@
+uuid: a3ec08e3-8795-451d-b390-eb159cf09e02
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_ui
+    - printfriendly
+    - role_delegation
+    - toolbar
+    - triune
+id: triune_admin
+label: 'Triune Admin'
+weight: 4
+is_admin: null
+permissions:
+  - 'access printfriendly'
+  - 'access toolbar'
+  - 'access user profiles'
+  - access_all_offices
+  - 'administer account settings'
+  - 'administer printfriendly'
+  - 'administer triune_callsheet display'
+  - 'administer triune_callsheet_employee display'
+  - 'administer triune_customer display'
+  - 'administer triune_customer fields'
+  - 'administer triune_customer form display'
+  - 'administer users'
+  - 'assign recruiter_bolingbrook role'
+  - 'assign triune_admin role'
+  - 'assign triune_supervisor role'
+  - 'change own username'
+  - edit_customers
+  - edit_employees
+  - place_orders
+  - view_reports

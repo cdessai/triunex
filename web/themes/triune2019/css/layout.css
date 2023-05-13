@@ -1,0 +1,482 @@
+@charset "utf-8";
+/** Layout Page Styles **/
+html, body {
+  height: 100%;
+}
+body > .dialog-off-canvas-main-canvas {
+	height: 100%;
+  display: flex;
+  flex-direction: column;
+	background: #ffffff;
+}
+.container {
+  flex: 1 0 auto;
+	width: 100%;
+}
+.sec-inner {
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  margin: 0px auto 0px auto;
+}
+.txt-center {
+  text-align: center;
+}
+.sec-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/** Top Info Bar Styles **/
+.top-bar {
+  width: 100%;
+  background: #efefef;
+  border-top: 1px solid #010e4a;
+  color: #000000;
+}
+.top-inner {
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  margin: 0 auto 0 auto;
+  padding: 0 25px 0 15px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+}
+.top-bar a {
+	display: inline-block;
+	padding: 0 10px;
+  color: #000080;
+}
+.top-bar a:hover,
+.top-bar a:focus {
+	background: #37c6f7;
+	color: #000080;
+}
+.top-right {
+  text-align: right;
+}
+.top-right ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.top-right ul li {
+  display: inline;
+  padding: 0 5px 0 0;
+  margin: 0;
+}
+.top-right ul li a {
+	font-size: 0.9em;
+}
+.top-divider {
+  color: #9ea1c4;
+}
+@media screen and (max-width: 1200px) {
+  .top-inner {
+    padding: 3px 25px 3px 25px;
+  }
+}
+@media screen and (max-width: 460px) {
+  .top-inner {
+    display: block;
+  }
+  .top-left {
+    text-align: center;
+  }
+  .top-right {
+    text-align: center;
+  }
+}
+
+/** Header Styles **/
+.main-header {
+  width: 100%;
+  height: 144px;
+  position: relative;
+  z-index: 999;
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+  transition: all 0.3s;
+}
+.header-inner {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  margin: 0 auto 0 auto;
+  box-sizing: border-box;
+}
+.logo {
+  flex-basis: 68%;
+	padding: 25px 0;
+}
+.main-header .logo img {
+  width: 250px;
+  height: 88px;
+  transition: all 0.3s;
+}
+.main-menu {
+  flex-basis: 32%;
+  position: relative;
+  z-index: 9999;
+  padding-top: 25px;
+	padding: 50px 0 25px 0;
+  transition: all 0.3s;
+}
+@media screen and (max-width: 1200px) {
+  .header-inner {
+    padding: 0 0 0 25px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .logo {
+    flex-basis: 50%;
+  }
+  .main-menu {
+    flex-basis: 50%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .main-header {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+    position: relative;
+  }
+  .header-inner {
+    display: block;
+  }
+  .logo {
+    text-align: center;
+  }
+  .header-spacer {
+    display: none;
+  }
+}
+@media screen and (max-width: 640px) {
+  .main-header {
+    position: relative;
+    top: 0;
+  }
+}
+
+/** Section 1 | Main Content Styles **/
+#main-content {
+  width: 100%;
+  padding: 45px 25px 0 25px;
+  background: #efefef;
+  background: linear-gradient(to bottom,  #efefef 0%,#ffffff 100%);
+  background: -moz-linear-gradient(top,  #efefef 0%, #ffffff 100%);
+  background: -webkit-linear-gradient(top,  #efefef 0%,#ffffff 100%);
+  border-top: 2px solid #ffffff;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 768px) {
+  #main-content {
+    padding: 45px 45px 0 45px;
+  }
+}
+
+/** App Header Styles **/
+.app-header {
+	clear: both;
+	display: flex;
+	padding: 25px 0 0 0;
+}
+.header-title {
+	flex: 1;
+}
+.header-title h2 {
+	margin: 0;
+}
+.app-links {
+	flex: 2;
+  box-sizing: border-box;
+  text-align: right;
+}
+.app-links a {
+	display: inline-block;
+	padding: 2px 25px 2px 25px;
+	border-radius: 3px;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+	background: #000080;
+	color: #ffffff;
+	font-weight: 600;
+}
+.app-links a:hover,
+.app-links a:focus {
+	background: #37c6f7;
+	color: #000080;
+}
+.app-links img {
+  margin: 0 40px;
+}
+.view-links {
+	margin: 75px 0 0 0;
+}
+.app-info-block {
+	flex: 1;
+}
+
+/** App Info Styles **/
+.app-info {
+	display: flex;
+	padding: 5px 25px 5px 15px;
+	background: #ffffff;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+}
+.ai-sec01,
+.ai-sec01 {
+	flex: 1;
+}
+.ai-sec02, .ai-sec03 {
+  flex: 1;
+}
+.tl-blue {
+	text-transform: uppercase;
+	color: #020b46;
+}
+.note-block {
+	padding: 5px 25px 5px 15px;
+	background: #ffffff;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+}
+
+/** App Link Styles **/
+.app-button {
+  float: right;
+	margin: 0 2px 5px 0;
+  box-sizing: border-box;
+  text-align: right;
+}
+.action-links a {
+	color: #000080;
+	font-weight: 600;
+}
+.action-links a:hover,
+.action-links a:focus {
+	color: #37c6f7;
+}
+.app-breadcrumb {
+	margin: 5px 0 0 0;
+	padding: 2px 25px 2px 25px;
+	border-radius: 3px;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+	background: #091caa;
+	color: #ffffff;
+	font-weight: 600;
+}
+.app-breadcrumb a {
+	color: #fffcc3;
+}
+.app-breadcrumb a:hover,
+.app-breadcrumb a:focus {
+	color: #d4daff;
+}
+.config-row {
+	margin: 7px 0 0 0;
+}
+.button-back {
+	display: inline-block;
+	margin: 0 5px 0 0;
+}
+.button-back input {
+	padding: 8px 25px 8px 25px;
+	border-radius: 3px;
+	border-collapse: collapse;
+	border: 0;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+	background: #091caa;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 600;
+  font-size: 1.0em;
+	color: #ffffff;
+  cursor: pointer;
+}
+.button-back input:hover,
+.button-back input:focus {
+	background: #d10307;
+}
+.button--danger {
+	padding: 8px 25px 8px 25px;
+	border-radius: 3px;
+	border-collapse: collapse;
+	border: 0;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+	background: #091caa;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 600;
+  font-size: 1.0em;
+	color: #ffffff;
+  cursor: pointer;
+}
+.button--danger:hover,
+.button--danger:focus {
+	background: #d10307;
+}
+
+/** App Tab Styles **/
+ul.report-tabs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+	border-bottom: 1px solid #a3a3a3;
+}
+ul.report-tabs li {
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+ul.report-tabs li a {
+  padding: 5px 10px 5px 10px;
+  border-top: 1px solid #a3a3a3;
+  border-left: 1px solid #a3a3a3;
+  border-right: 1px solid #a3a3a3;
+  border-radius: 5px 5px 0 0;
+  background-color: #e4e4e4;
+}
+ul.report-tabs li a.is-active {
+  position: relative;
+  z-index: 99;
+  background-color: #efefef;
+  border-bottom: 2px solid #efefef;
+}
+ul.report-tabs li a:hover {
+	background: #37c6f7;
+	color: #000080;
+}
+
+/** Exposed Form Employee Call List Styles **/
+#views-exposed-form-employee-list-default {
+	display: flex;
+	flex-wrap: wrap;
+}
+#views-exposed-form-employee-list-default .js-form-item {
+	display: flex;
+	flex-basis: 30%;
+}
+#views-exposed-form-employee-list-default .js-form-item label {
+	flex-basis: 26%;
+	padding: 0 0 0 5px;
+  text-transform: capitalize;
+}
+#views-exposed-form-employee-list-default .js-form-item input {
+  flex-basis: 70%;
+  width: 70%;
+  height: 30px;
+	margin: 3px 0 0 0;
+  padding: 3px 3px 3px 5px;
+  outline: 0 none;
+  border: 1px solid #6E6F71;
+  box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  color: #888;
+}
+#views-exposed-form-employee-list-default .form-actions {
+	padding: 0 0 0 14.3%;
+	box-sizing: border-box;
+}
+
+/** Footer/Contact Us Section Styles **/
+#footer {
+	flex-shrink: 0;
+  width: 100%;
+  background: #2a2a2a;
+  padding: 15px 25px 15px 25px;
+  box-sizing: border-box;
+  color: #d4cfca;
+  font-size: 0.85em;
+}
+#footer h2 {
+  font-size: 1.1em;
+  color: #ffffff;
+}
+#footer a {
+  color: #ffffff;
+}
+#footer a:hover,
+#footer a:focus {
+  color: #fff95b;
+}
+.footer-col {
+  display: flex;
+}
+.footer-row {
+  flex: 1;
+  padding: 5px 15px 15px 15px;
+  margin: 0 1% 0 1%;
+  border-right: 1px dotted rgba(255,255,255,0.5);
+}
+.footer-row:last-of-type {
+  border-right: 0;
+}
+@media screen and (max-width: 768px) {
+  #contact {
+    padding: 45px 45px 25px 45px;
+  }
+}
+
+/** Custom Input Field Styles **/
+#import-employee-id {
+  height: 30px;
+}
+
+/** Complete Order View page Styles **/
+.print-only {
+  height: 0;
+  overflow: hidden;
+}
+
+/** Report CSS **/
+.daily-report-table {
+  font-size: 0.9em;
+  line-height: 1em;
+}
+.daily-report-table th {
+  padding: 4px 8px 4px 8px;
+  text-align: center;
+}
+.daily-report-table td {
+  padding: 4px 8px 4px 8px;
+}
+.daily-report-table td:nth-child(even) {
+  border-left: 2px solid #cccccc;
+}
+
+.weekly-report-table {
+  font-size: 0.9em;
+  line-height: 1em;
+}
+.weekly-report-table th {
+  padding: 4px 8px 4px 8px;
+  text-align: center;
+}
+.weekly-report-table td {
+  padding: 4px 8px 4px 8px;
+}
+.grandtotal td {
+  border-top: 3px solid #cccccc;
+  font-weight: bold;
+}
+.weekly-report-table td:nth-child(even) {
+  border-left: 2px solid #cccccc;
+}
+
+.ai-sec04 {
+  margin-left: -20px;
+}

@@ -1,0 +1,14 @@
+uuid: ef1977cf-e5e1-42b1-a396-030a3dda6e3a
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.recruiter_bolingbrook
+  module:
+    - user
+id: user_add_role_action.recruiter_bolingbrook
+label: 'Add the Recruiter_Bolingbrook role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: recruiter_bolingbrook

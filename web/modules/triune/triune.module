@@ -1,0 +1,403 @@
+<?php
+
+use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Form\FormStateInterface;
+
+function triune_theme($existing, $type, $theme, $path) {
+  return [
+    'blank' => [
+      'variables' => array(
+        'form' => NULL,
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'employee' => [
+      'variables' => array(
+        'form' => NULL,
+        'content' => NULL,
+        'employee' => array(),
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'employee_list' => [
+      'variables' => array(
+        'form' => NULL,
+        'variables' => array(),
+        'employee_list' => array(),
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'notice_add' => [
+      'variables' => array(
+        'form' => NULL,
+        'content' => array(),
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'notice_list' => [
+      'variables' => array(
+        'label' => NULL,
+        'type' => NULL,
+        'notice_list' => array(),
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'report_daily' => [
+      'variables' => array(
+        'content' => NULL,
+        'employee_data' => array(),
+        'variables' => array(),
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'report_difference' => array(
+      'variables' => array(
+        'form' => NULL,
+        'orders' => array(),
+        'variables' => array(),
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+    ),
+    'report_weekly' => array(
+      'variables' => array(
+        'form' => NULL,
+        'customers' => array(),
+        'total' => array(),
+        'variables' => array(),
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+    ),
+    'customer' => [
+      'variables' => array(
+        'form' => NULL,
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'customer_list' => [
+      'variables' => array(
+        'form' => NULL,
+        'content' => NULL,
+        'customer_list' => array(),
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'jobrate_add' => [
+      'variables' => array(
+        'form' => NULL,
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'jobrate_list' => [
+      'variables' => array(
+        'form' => NULL,
+        'content' => NULL,
+        'jobrate_list' => array(),
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'callsheet_list' => [
+      'variables' => array(
+        'office' => NULL,
+        'callsheets' => array(),
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'page'
+		],
+    'callsheet_add' => [
+      'variables' => array(
+        'form' => NULL,
+        'content' => NULL,
+        'route' => array(),
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'callsheet_edit' => [
+      'variables' => array(
+        'form' => NULL,
+        'content' => NULL,
+        'route' => array(),
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'callsheet_view' => [
+      'variables' => array(
+        'callsheet' => NULL,
+        'content' => NULL,
+        'callsheet_employees' => array(),
+        'order_list' => array(),
+        'variables' => array(),
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'callsheet_employee_add' => [
+      'variables' => array(
+        'form' => NULL,
+        'variables' => array(),
+        'callsheet_id' => '0',
+        'employee_list' => array(),
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'callsheet_employee_edit' => [
+      'variables' => array(
+        'callsheet' => NULL,
+        'employee' => NULL,
+        'form' => NULL,
+        'variables' => array(),
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'callsheet_employee_assign' => [
+      'variables' => array(
+        'form' => NULL,
+        'variables' => array(),
+        'order_list' => array(),
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'order_list' => [
+      'variables' => array(
+        'form' => NULL,
+        'order_list' => array(),
+        'variables' => array(),
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'order_list_open' => [
+      'variables' => array(
+        'form' => NULL,
+        'order_list' => array(),
+        'variables' => array(),
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'order_list_active' => [
+      'variables' => array(
+        'form' => NULL,
+        'order_list' => array(),
+        'variables' => array(),
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'order_list_complete' => [
+      'variables' => array(
+        'form' => NULL,
+        'order_list' => array(),
+        'variables' => array(),
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'order_add' => [
+      'variables' => array(
+        'form' => NULL,
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'order_edit' => [
+      'variables' => array(
+        'order' => array(),
+        'form' => NULL,
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+    ],
+    'order_copy' => [
+      'variables' => array(
+        'order' => array(),
+        'form' => NULL,
+        'employee_list' => array(),
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'order_view_open' => [
+      'variables' => array(
+        'order' => array(),
+        'variables' => array(),
+        'form' => NULL,
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'order_view_active' => [
+      'variables' => array(
+        'order' => array(),
+        'variables' => array(),
+        'form' => NULL,
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'order_view_complete' => [
+      'variables' => array(
+        'order' => array(),
+        'variables' => array(),
+        'form' => NULL,
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'order_employee_add' => [
+      'variables' => array(
+        'form' => NULL,
+        'order' => NULL,
+        'employee_list' => array(),
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'order_employee_add_called' => [
+      'variables' => array(
+        'form' => NULL,
+        'order' => NULL,
+        'employee_list' => array(),
+        'variables' => array(),
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+    'order_employee_add_all' => [
+      'variables' => array(
+        'form' => NULL,
+        'order' => NULL,
+        'employee_list' => array(),
+        'variables' => array(),
+        'content' => NULL,
+        'markup' => 0,
+      ),
+      'option' => [],
+      'render element' => 'form'
+		],
+  ];
+}
+
+
+/**
+ * Implements hook_mail().
+ */
+function triune_mail($key, &$message, $params) {
+  $options = array(
+    'langcode' => $message['langcode'],
+  );
+  switch ($key) {
+    case 'triune_order_report':
+      //$message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['from'] = $params['from'];
+      $message['subject'] = t('Order Request for: @title', array('@title' => $params['title']), $options);
+      $message['body'][] = Html::escape($params['message']);
+      break;
+  }
+}
+
+/**
+ * Implements hook_form_alter
+ **/
+function triune_form_alter(&$form, FormStateInterface &$form_state,$form_id) {
+    // Create hidden field to store error messages
+    $form['triune_error_msgs']['#type'] = 'hidden';
+    // Automatically add ID attribute for each form element
+    foreach ($form as $key => $frm) {
+        if ( stristr($key, 'field_' ) ) {
+            $form[$key]['#id'] = $key; 
+        }
+    }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function triune_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+    // Alter login form and add own custom submit handler.
+    $form['#submit'][] = '_triune_user_login_form_submit';
+}
+
+/**
+ * Custom submit handler for login form.
+ */
+function _triune_user_login_form_submit($form, FormStateInterface $form_state) {
+    // Set redirect to login form.
+    $form_state->setRedirect('triune.callsheet.list');
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function triune_entity_type_alter(array &$entity_types) {
+  $entity_types['triune_office']->addConstraint('OfficeValuesConstraint');
+}
+
+?>

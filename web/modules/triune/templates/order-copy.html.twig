@@ -1,0 +1,49 @@
+{{ attach_library('triune/order') }}
+
+
+<form class="order-form" action="/triune/order/{{ order.id.value }}/copy" method="post" id="order-form" accept-charset="UTF-8" {{ form.attributes }}>
+  <div style="display:none">
+    {{ form.order_id }}
+  </div>
+  {{ form.label }}
+  {{ form.office_id }}
+  {{ form.customer_id }}
+  {{ form.date }}
+  {{ form.shift }}
+  {{ form.start }} {{ form.end }} {{ form.depart }}
+  {{ form.quantity }}
+  {{ form.position }}
+  {{ form.pay_rate }}
+  {{ form.notes }}
+  
+  <table id="msortTable1" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th scope="col"><input type="checkbox" name="select-all" id="select-all" /></th>
+        <th scope="col">Employee ID</th>
+        <th scope="col">Employee Name</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+    {% for key, employee in employee_list %}
+    <tr>
+      <td>{% if form.employees[key] %}{{ form.employees[key] }}{% else %}DNR{% endif %}</td>
+      <td>{{ employee.resource_id }}</td>
+      <td>{{ employee.name }}</td>
+    </tr>
+    {% endfor %}
+    
+    </tbody>
+  </table>
+
+  <div class="config-row buttons">
+    <div class="button-back"><a href="/triune/order/list" class="button form-submit">Cancel</a></div>
+    <div class="app-button">{{ form.submit }}</div>
+  </div>
+  
+  {{ form.actions.submit }}
+  {{ form.form_build_id }}
+  {{ form.form_token }}
+  {{ form.form_id }}
+</form>

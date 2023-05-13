@@ -1,0 +1,53 @@
+{#
+/**
+ * Triune custom homepage theme for Drupal 8.x
+   only if node/1/edit is the front page
+ */
+#}
+<div class="container">
+
+  <!-- Top Info Bar Content -->
+  <div class="top-bar" id="top">
+    <div class="top-inner">
+      <div class="top-right">
+        {{ page.top_right }}
+      </div>
+    </div>
+  </div>
+  
+  <!-- Header Content START -->
+  <header class="main-header">
+    <div class="header-inner"> 
+      
+      <!-- Site Logo -->
+      <div class="logo"><a href="/"><img src="{{ logopath }}" alt="{{ 'Home'|t }}" /></a></div> 
+      
+      <!-- Main Menu / Responsive Dropdown -->
+      <nav class="main-menu">
+        {{ page.main_menu }}  
+      </nav>
+      
+    </div>
+  </header>
+  <div class="clear-fl">&nbsp;</div>
+  <!-- Header Content END -->
+  
+  <!-- Section 1 -->
+  <section id="main-content">    
+      <div class="sec-inner">
+        
+      {{ page.breadcrumb }}
+      {{ page.content }}
+        
+      </div>
+  </section>
+
+</div>
+
+<footer id="footer">
+	<div class="sec-inner">
+		<div class="footer-bottom">
+			{{ page.footer_bottom }}
+		</div>
+	</div>     
+</footer>

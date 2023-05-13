@@ -1,0 +1,22 @@
+uuid: c22ec00d-68c8-4e79-be8e-1a2e5bebeef5
+langcode: en
+status: true
+dependencies:
+  theme:
+    - triune2019
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: triune2019_local_tasks
+theme: triune2019
+region: content
+weight: -6
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

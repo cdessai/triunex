@@ -1,0 +1,17 @@
+printfriendly_image: printfriendly-pdf-button-nobg-md.png
+db_version: 1
+printfriendly_display:
+  article: 0
+  page: 0
+  teaser: 0
+printfriendly_page_header: custom_logo
+printfriendly_page_custom_header: /themes/triune2019/logo.png
+printfriendly_tagline: ''
+printfriendly_click_delete: '1'
+printfriendly_images: '1'
+printfriendly_image_style: right
+printfriendly_email: '0'
+printfriendly_pdf: '0'
+printfriendly_print: '0'
+printfriendly_custom_css: /themes/triune2019/css/printfriendly.css
+custom_button_img_url: ''

@@ -1,0 +1,84 @@
+{{ attach_library('core/jquery') }}
+{{ attach_library('core/jquery.once') }}
+{{ attach_library('core/drupal.ajax') }}
+{{ attach_library('triune/callsheet_employee') }}
+
+
+<div class="app-info">
+  <div class="ai-sec01">
+    <strong>Employee:</strong> {{ employee.first_name.value }} {{ employee.last_name.value }}<br>
+    <strong>Phone #: </strong> {{ employee.phone.value }}<br>
+    {% if employee.accident is not empty %}
+    <strong>Date of last accident:</strong> {{ employee.accident.date }}<br>
+    {% if employee.accident.note is not empty %}
+    <strong>Accident Notes: </strong> {{ employee.accident.note }}
+    {% endif %}
+    {% endif %}
+  </div>
+  <div class="ai-sec02">
+    <strong>{{ callsheet.label.value }}</strong><br>
+    <strong>Week of:</strong> {{ callsheet.date.value|date("M d, Y") }}<br>
+  </div>
+  {% if callsheet.notes_value|trim is not empty %}
+  <div class="ai-sec03">
+    <div class="note-block">
+      <strong>Call Sheet Notes:</strong>
+      <p>{{ callsheet.notes_value }}</p>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<form class="callsheet-employee-edit-form" data-drupal-selector="callsheet-employee-edit-form" action="/triune/callsheet/{{ callsheet.id.value }}/employee/{{ employee.id.value }}/edit" method="post" id="callsheet-employee-edit-form" accept-charset="UTF-8" {{ form.attributes }}>
+  <div style="display:none">
+    {{ form.id }}
+    {{ form.callsheet_id }}
+    {{ form.employee_id }}
+  </div>
+  
+  <table id="msortTable" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Availability</th>
+        <th>Shift</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for key, day in variables.date_range %}
+      {% set shiftkey = "shift_" ~ key %}
+      {% set statuskey = "status_" ~ key %}
+      {% set noteskey = "notes_" ~ key %}
+      <tr>
+        <td>{{ day|date("D, M d") }}</td>
+        <td>{% if variables.status[key] == 'assigned' %}{{ variables.order[key].name }}{% else %}{{ form[statuskey] }}{% endif %}</td>
+        <td>{% if variables.status[key] == 'assigned' %}{{ variables.order[key].shift }}{% else %}{{ form[shiftkey] }}{% endif %}</td>
+        <td>{{ form[noteskey] }}</td>
+        <td id="action-{{ key }}">
+          {% if variables.status[key] == 'assigned' %}
+          <a href="/triune/order/{{ variables.order[key].id }}/view"><i class="far fa-eye">&nbsp;</i> View Order</a>&nbsp;
+          {% else %}
+          <a href="/triune/callsheet/{{ callsheet.id.value }}/employee/{{ employee.id.value }}/assign/{{ day }}/0"><i class="fas fa-user-plus">&nbsp;</i> Assign to Order</a>
+          {% endif %}
+          </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  
+  {{ form.employee_notes }}
+  
+  
+  <div class="config-row buttons">
+  {{ form.submit }}
+  </div>
+  
+  {{ form.actions.submit }}
+  {{ form.form_build_id }}
+  {{ form.form_token }}
+  {{ form.form_id }}
+</form>
+  

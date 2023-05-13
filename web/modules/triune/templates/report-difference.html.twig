@@ -1,0 +1,49 @@
+{{ attach_library('triune/reports') }}
+
+<div {{ attributes }}>
+
+	<div id="block-projectdashboardtabs" class="contextual-region">
+      <ul class="report-tabs">
+        <li><a href="/triune/reports/difference" class="is-active">Difference Report</a></li>
+        <li><a href="/triune/reports/daily">Daily Report</a></li>
+        <li><a href="/triune/reports/weekly">Weekly Report</a></li>
+        <li><a href="/triune/notice/cr/list">Check Requests</a></li>
+        <li><a href="/triune/notice/dnr/list">DNR List</a></li>
+        <li><a href="/triune/notice/ar/list">Accident Report</a></li>
+      </ul>
+  </div>
+  
+  <header class="app-header">
+		<div class="header-title">
+			<h2>Difference Report for {{ variables.date }}</h2>
+		</div>
+    <input type="date" id="difference-report-date" name="report-date" value="{{ variables.input_date }}"></input>
+	</header>
+  
+  <table id="msortTable0" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th scope="col">Customer</th>
+        <th scope="col">Shift</th>
+        <th scope="col">Today's Order</th>
+        <th scope="col">Today's Filled</th>
+        <th scope="col">Yesterday's Order</th>
+        <th scope="col">Yesterday's Filled</th>
+        <th scope="col">Order/Fill Difference</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for order in orders %}
+    <tr>
+      <td>{{ order.customer.label.value }}</td>
+      <td>{{ order.shift.value }}</td>
+      <td>{{ order.quantity.value }}</td>
+      <td>{{ order.filled }}</td>
+      <td>{{ order.yesterday.quantity }}</td>
+      <td>{{ order.yesterday.filled }}</td>
+      <td>{{ order.filled - order.quantity.value }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>

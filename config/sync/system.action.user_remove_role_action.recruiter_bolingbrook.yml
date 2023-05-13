@@ -1,0 +1,14 @@
+uuid: fba00d9d-969e-4a9c-a1c0-7136ba90eac0
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.recruiter_bolingbrook
+  module:
+    - user
+id: user_remove_role_action.recruiter_bolingbrook
+label: 'Remove the Recruiter_Bolingbrook role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: recruiter_bolingbrook

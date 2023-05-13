@@ -1,0 +1,40 @@
+{{ attach_library('triune/customer') }}
+<div {{ attributes }}>
+  
+  <div class="app-header">
+    <h3>Manage Customers</h3>
+    
+    <div class="app-links">
+      <a href="/triune/customer/add">Add Customer</a>
+    </div>
+  </div>
+
+  <table id="msortTable" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th specifier="customer_name">Customer Name</th>
+        <th specifier="office">Office</th>
+        <th specifier="emails_1">1st Shift Supervisor Contact</th>
+        <th specifier="emails_2">2nd Shift Supervisor Contact</th>
+        <th specifier="emails_3">3rd Shift Supervisor Contact</th>
+        <th specifier="address">Address</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for key, customer in customer_list %}
+    <tr>
+      <td>{{ customer.name }}</td>
+      <td>{{ customer.office }}</td>
+      <td>{{ customer.s1_name }}<br>{{ customer.email_1 }}<br>{{ customer.s1_phone }}</td>
+      <td>{{ customer.s2_name }}<br>{{ customer.email_2 }}<br>{{ customer.s2_phone }}</td>
+      <td>{{ customer.s3_name }}<br>{{ customer.email_3 }}<br>{{ customer.s3_phone }}</td>
+      <td>{{ customer.address }}</td>
+      <td><a href="/triune/customer/{{ customer.id }}/edit">Edit</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  
+
+</div>

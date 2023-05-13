@@ -1,0 +1,33 @@
+uuid: aeaaa75b-7969-410e-831c-c862ccb9ed95
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.top-bar-menu
+  module:
+    - system
+    - user
+  theme:
+    - triune2019
+id: topbarmenu
+theme: triune2019
+region: top_right
+weight: -9
+provider: null
+plugin: 'system_menu_block:top-bar-menu'
+settings:
+  id: 'system_menu_block:top-bar-menu'
+  label: 'Top Bar Menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      authenticated: authenticated

@@ -1,0 +1,20 @@
+access_application:
+  title: 'Access Triune Application'
+
+access_all_offices:
+  title: 'Access All Offices'
+
+place_orders:
+  title: 'Place Orders'
+
+view_reports:
+  title: 'View Reports'
+  
+view_test_data:
+  title: 'View Test Data'
+
+edit_customers:
+  title: 'Edit Customers'
+
+edit_employees:
+  title: 'Edit Employees'

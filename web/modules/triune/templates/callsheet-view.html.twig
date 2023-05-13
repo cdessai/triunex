@@ -1,0 +1,82 @@
+{{ attach_library('core/jquery') }}
+{{ attach_library('core/jquery.once') }}
+{{ attach_library('core/drupal.ajax') }}
+{{ attach_library('triune/callsheet') }}
+{{ attach_library('triune/modal') }}
+
+
+	<div class="app-info">
+		<div class="ai-sec01">
+			<strong>{{ callsheet.label.value }}</strong><br>
+			<strong>Week of:</strong> {{ callsheet.date.value|date("M d, Y") }}
+    </div>
+    {% if callsheet.notes_value|trim is not empty %}
+		<div class="ai-sec02">
+      <div class="note-block">
+        <strong>Notes:</strong>
+        <p>{{ callsheet.notes_value }}</p>
+      </div>
+		</div>
+    {% endif %}
+	</div>
+
+  <header class="app-header">
+		<div class="header-title">
+			<h2>{{ callsheet.label.value }}</h2>
+		</div>
+		<div class="app-links">
+			<a href="/triune/callsheet/{{ callsheet.id.value }}/employee/add"><i class="fas fa-plus-circle">&nbsp;</i> Add Employee</a>
+			<a href="/triune/callsheet/{{ callsheet.id.value }}/edit"><i class="fas fa-edit">&nbsp;</i> Edit Call Sheet</a>
+		</div>
+	</header>
+
+  <table id="msortTable1" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        {% for day in variables.date_range %}
+        <th scope="col">{{ day|date("D") }}<br>{{ day|date("M d") }}</th>
+        {% endfor %}
+        <th scope="col">Notes</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% if callsheet_employees %}
+      {% for key, employee in callsheet_employees %}
+        <tr id="row-{{ employee.id }}">
+          <td>{{ employee.resource_id }}</td>
+          <td id="name-{{ employee.id }}">{{ employee.name }}</td>
+          <td>{{ employee.phone }}</td>
+          {% for day, date in variables.date_range %}
+          <td>{{ variables.order_employee[employee.employee_id][day] }}</td>
+          {% endfor %}
+          <td>{{ employee.notes }}</td>
+          <td>
+            <a href="/triune/callsheet/{{ callsheet.id.value }}/employee/{{ employee.employee_id }}/edit"><i class="fas fa-edit">&nbsp;</i> Edit</a>&nbsp;&nbsp;
+            <a href="/triune/callsheet/{{ callsheet.id.value }}/employee/{{ employee.employee_id }}/delete" class="delete-employee"><i class="fas fa-minus-circle">&nbsp;</i> Remove</a>
+          </td>
+        </tr>
+      {% endfor%}
+    {% else %}
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    {% endif %}
+    </tbody>
+  </table>
+
+

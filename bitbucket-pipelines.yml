@@ -1,0 +1,90 @@
+# Reusable references
+
+"check branch": &checkBranch
+                  >
+                  case "$BITBUCKET_BRANCH" in
+                  "dev")
+                  USER="${SSH_USER}"
+                  URL="${SSH_URL}"
+                  PORT="${SSH_PORT}"
+                  DRUPAL_PATH="${DEV_DRUPAL_PATH}";;
+                  "stage")
+                  USER="${SSH_USER}"
+                  URL="${SSH_URL}"
+                  PORT="${SSH_PORT}"
+                  DRUPAL_PATH="${STAGE_DRUPAL_PATH}";;
+                  "main")
+                  USER="${SSH_USER}"
+                  URL="${SSH_URL}"
+                  PORT="${SSH_PORT}"
+                  DRUPAL_PATH="${PROD_DRUPAL_PATH}";;
+                  esac
+
+
+"lint php": &lintPhp
+  name: Lint PHP using drupal standards
+  image: willhallonline/drupal-phpcs
+  script:
+    - phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml --warning-severity=0 web/modules/custom
+
+"Deploy Code": &deployCode
+  name: Enable maintenance mode & Deploy code
+  image:
+    name: atlassian/default-image:3
+  script:
+    - *checkBranch
+    - pipe: atlassian/ssh-run:0.4.0
+      variables:
+        SSH_USER: $USER
+        SERVER: $URL
+        PORT: $PORT
+        SSH_KEY: $MY_SSH_KEY
+        COMMAND: 'cd $DRUPAL_PATH && ./vendor/drush/drush/drush sset system.maintenance_mode TRUE && git pull --no-edit'
+
+"Install configurations": &installConfigurations
+  name: drush updb & import configurations
+  image:
+    name: atlassian/default-image:3
+  script:
+    - *checkBranch
+    - pipe: atlassian/ssh-run:0.4.0
+      variables:
+        SSH_USER: $USER
+        SERVER: $URL
+        PORT: $PORT
+        SSH_KEY: $MY_SSH_KEY
+        COMMAND: 'cd $DRUPAL_PATH && ./vendor/drush/drush/drush updb -y && ./vendor/drush/drush/drush cr && ./vendor/drush/drush/drush cim -y'
+
+"Build themes & Go Live": &goLive
+  name: Build themes & Go live
+  image:
+    name: atlassian/default-image:3
+  script:
+    - *checkBranch
+    - pipe: atlassian/ssh-run:0.4.0
+      variables:
+        SSH_USER: $USER
+        SERVER: $URL
+        PORT: $PORT
+        SSH_KEY: $MY_SSH_KEY
+        COMMAND: 'cd $DRUPAL_PATH && ./vendor/drush/drush/drush cr && ./vendor/drush/drush/drush sset system.maintenance_mode FALSE'
+
+pipelines:
+  default:
+    - parallel:
+        - step: *lintPhp
+  branches:
+    dev:
+      - step: *deployCode
+      - step: *installConfigurations
+      - step: *goLive
+    stage:
+      - step: *deployCode
+      - step: *installConfigurations
+      - step: *goLive
+    main:
+      - step: *deployCode
+      - step: *installConfigurations
+      - step: *goLive
+options:
+  docker: true

@@ -1,0 +1,45 @@
+uuid: b7a98734-2233-4d7f-a652-fb9e99129e92
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - user
+id: user.field_office
+field_name: field_office
+entity_type: user
+type: list_integer
+settings:
+  allowed_values:
+    -
+      value: 0
+      label: 'Select Office'
+    -
+      value: 1812
+      label: Schmidt
+    -
+      value: 1811
+      label: 25th
+    -
+      value: 1810
+      label: 60th
+    -
+      value: 7069
+      label: Aurora
+    -
+      value: 7051
+      label: 'Mirmar Rd'
+    -
+      value: 7052
+      label: 'Main St'
+    -
+      value: 7070
+      label: 'Harvill Ave'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

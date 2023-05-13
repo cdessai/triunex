@@ -1,0 +1,12 @@
+uuid: 412ee6df-7378-43a7-a60a-592b0b46e206
+langcode: en
+status: true
+dependencies:
+  module:
+    - triune
+id: access_all_offices
+label: 'Access All Offices'
+weight: 6
+is_admin: null
+permissions:
+  - access_all_offices

@@ -1,0 +1,14 @@
+name: Triune
+type: module
+description: "Controller for Triune resource management and Ascentis integration."
+# core: 8.x
+package: Triune
+configure: triune.main_settings
+dependencies:
+  - field
+  - options
+
+# Information added by Drupal.org packaging script on 2018-04-23
+version: '8.x-1.1'
+core_version_requirement: ^8 || ^9
+project: 'triune'

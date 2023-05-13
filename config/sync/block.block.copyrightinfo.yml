@@ -1,0 +1,25 @@
+uuid: 0ab4a770-9dd5-4f4d-a68c-e4ec6103b6fe
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:3db82d27-42f3-48f0-9215-b524833a1228'
+  module:
+    - block_content
+  theme:
+    - triune2019
+id: copyrightinfo
+theme: triune2019
+region: footer_bottom
+weight: -8
+provider: null
+plugin: 'block_content:3db82d27-42f3-48f0-9215-b524833a1228'
+settings:
+  id: 'block_content:3db82d27-42f3-48f0-9215-b524833a1228'
+  label: 'Copyright Info'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

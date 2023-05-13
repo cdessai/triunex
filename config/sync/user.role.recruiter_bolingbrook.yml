@@ -1,0 +1,17 @@
+uuid: ae7006c5-8094-423d-9cf8-59e793b49641
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_ui
+    - triune
+id: recruiter_bolingbrook
+label: 'Triune Recruiter'
+weight: 3
+is_admin: null
+permissions:
+  - 'administer triune_callsheet display'
+  - 'administer triune_callsheet_employee display'
+  - 'administer triune_customer form display'
+  - 'change own username'
+  - view_reports

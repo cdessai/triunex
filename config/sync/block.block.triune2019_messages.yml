@@ -1,0 +1,22 @@
+uuid: c0131763-7a6d-46e1-b3ee-df769ef7d9ec
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - triune2019
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: triune2019_messages
+theme: triune2019
+region: content
+weight: -8
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

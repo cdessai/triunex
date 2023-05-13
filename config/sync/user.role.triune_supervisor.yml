@@ -1,0 +1,21 @@
+uuid: 4534b00a-4e40-4417-8152-571c693e4667
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_ui
+    - printfriendly
+    - triune
+id: triune_supervisor
+label: 'Triune Supervisor'
+weight: 5
+is_admin: null
+permissions:
+  - 'access printfriendly'
+  - 'administer printfriendly'
+  - 'administer triune_callsheet display'
+  - 'administer triune_callsheet_employee display'
+  - 'administer triune_customer form display'
+  - edit_employees
+  - place_orders
+  - view_reports

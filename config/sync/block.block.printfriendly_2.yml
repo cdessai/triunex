@@ -1,0 +1,26 @@
+uuid: 750a5e6c-792f-44a3-893f-0b10f978582c
+langcode: en
+status: true
+dependencies:
+  module:
+    - printfriendly
+    - system
+  theme:
+    - triune2019
+id: printfriendly_2
+theme: triune2019
+region: content
+weight: -2
+provider: null
+plugin: block_printfriendly
+settings:
+  id: block_printfriendly
+  label: printfriendly
+  label_display: '0'
+  provider: printfriendly
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/triune/order/*/view\r\n/triune/reports/daily\r\n/triune/reports/weekly"

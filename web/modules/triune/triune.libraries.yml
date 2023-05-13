@@ -1,0 +1,107 @@
+customer:
+  version: 8.7.1
+  js:
+    assets/js/customer.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - triune/jquery.tablesorter
+
+callsheet:
+  version: 8.7.1
+  js:
+    assets/js/callsheet.js: {}
+  css:
+    theme:
+        assets/css/callsheet.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - triune/jquery.tablesorter
+    
+order:
+  version: 8.7.5
+  js:
+    assets/js/order.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - triune/jquery.tablesorter
+
+employee:
+  version: 8.7.1
+  js:
+    assets/js/employee.js: {}
+  css:
+    theme:
+        assets/css/callsheet.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - triune/jquery.tablesorter
+
+callsheet_employee:
+  version: 8.7.1
+  js:
+    assets/js/callsheet-employee.js: {}
+  css:
+    theme:
+        assets/css/callsheet.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - triune/jquery.tablesorter
+    
+reports:
+  version: 8.7.1
+  js:
+    assets/js/reports.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - triune/jquery.tablesorter
+
+jobrate:
+  version: 8.7.1
+  js:
+    assets/js/jobrate.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - triune/jquery.tablesorter
+
+jquery.tablesorter:
+  js:
+    assets/js/jquery.tablesorter.js: {}
+  dependencies:
+    - core/jquery
+
+modal:
+  version: 0.9.1
+  js:
+    assets/js/modal.min.js: {}
+  css:
+    # assets/css/jquery.modal.min.css: {}
+  dependencies:
+    - core/jquery

@@ -1,0 +1,26 @@
+uuid: 57727eb6-1739-48cc-9fd7-6b2983021673
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+  module:
+    - contact
+    - filter
+    - search
+    - shortcut
+    - system
+    - triune
+_core:
+  default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
+id: authenticated
+label: 'Authenticated user'
+weight: 1
+is_admin: false
+permissions:
+  - 'access content'
+  - 'access shortcuts'
+  - 'access site-wide contact form'
+  - access_application
+  - 'search content'
+  - 'use text format basic_html'

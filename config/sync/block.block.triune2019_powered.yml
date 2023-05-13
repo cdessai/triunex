@@ -1,0 +1,22 @@
+uuid: 3cb9c80e-39f7-43b8-bf1d-1a829c1c2b08
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - triune2019
+_core:
+  default_config_hash: jQQUUWN2Uxr5qZtc9zcJKBCxpKY8orN1u2HPqYYRQDI
+id: triune2019_powered
+theme: triune2019
+region: disabled_blocks
+weight: -4
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

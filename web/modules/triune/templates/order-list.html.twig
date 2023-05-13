@@ -1,0 +1,109 @@
+<div {{ attributes }}>
+  	
+  <header class="app-header">
+		<div class="header-title">
+			<h2>New Orders</h2>
+		</div>
+    {% if variables.place_orders %}
+		<div class="app-links">
+			<a href="/triune/order/add"><i class="fas fa-plus-circle">&nbsp;</i> Add an Order</a>
+		</div>
+    {% endif %}
+	</header>
+	
+  <table id="msortTable" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th scope="col">Customer</th>
+        <th class="min-col" scope="col">Date Required</th>
+        <th scope="col">Shift</th>
+        <th scope="col">Position</th>
+        <th scope="col">Start/End Time</th>
+        <th scope="col">Order</th>
+        <th scope="col">Origination</th>
+        <th class="min-col" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for order in order_list.open %}
+    <tr>
+      <td>{{ order.customer.label.value }}</td>
+      <td class="min-col">{{ order.date.value|date("M d, Y") }}</td>
+      <td>{{ order.shift.value }}</td>
+      <td>{{ order.position.value }}</td>
+      <td>{{ order.start_time }} - {{ order.end_time }}</td>
+      <td>{{ order.fill }}/{{ order.quantity.value }}</td>
+      <td>{{ order.user.name.value }}</td>
+      <td class="min-col">
+				<a href="/triune/order/{{ order.id.value }}/view"><i class="far fa-eye">&nbsp;</i> View</a>&nbsp;&nbsp;
+			</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  
+  <h2>Active Orders</h2>
+  <table id="msortTable" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th scope="col">Customer</th>
+        <th class="min-col" scope="col">Date Required</th>
+        <th scope="col">Shift</th>
+        <th scope="col">Start Time</th>
+        <th scope="col">Depart Time</th>
+        <th scope="col">Attendance</th>
+        <th scope="col">Origination</th>
+        <th class="min-col" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for order in order_list.active %}
+    <tr>
+      <td>{{ order.customer.label.value }}</td>
+      <td class="min-col">{{ order.date.value|date("M d, Y") }}</td>
+      <td>{{ order.shift.value }}</td>
+      <td>{{ order.start_time }}</td>
+      <td>{{ order.depart_time }}</td>
+      <td>{{ order.fill }}/{{ order.quantity.value }}</td>
+      <td>{{ order.user.name.value }}</td>
+      <td class="min-col"><a href="/triune/order/{{ order.id.value }}/view"><i class="far fa-eye">&nbsp;</i> View</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  
+  <h2>Completed Orders</h2>
+  <table id="msortTable" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th scope="col">Customer</th>
+        <th class="min-col" scope="col">Date</th>
+        <th scope="col">Shift</th>
+        <th scope="col">Laborers Sent</th>
+        <th scope="col">Origination</th>
+        <th class="min-col" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for order in order_list.complete %}
+    <tr>
+      <td>{{ order.customer.label.value }}</td>
+      <td class="min-col">{{ order.date.value|date("M d, Y") }}</td>
+      <td>{{ order.shift.value }}</td>
+      <td>{{ order.fill }}/{{ order.quantity.value }}</td>
+      <td>{{ order.user.name.value }}</td>
+      <td class="min-col">
+				<a href="/triune/order/{{ order.id.value }}/view"><i class="far fa-eye">&nbsp;</i> View</a>&nbsp;&nbsp;
+				<a href="/triune/order/{{ order.id.value }}/copy"><i class="fas fa-plus-circle">&nbsp;</i> Copy</a>
+			</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% if variables.page != 0 %}
+  <a href="/triune/order/list?page={{ variables.last }}">Last</a>
+  {% endif %}
+  {% if not variables.max %}
+  <a href="/triune/order/list?page={{ variables.next }}">Next</a>
+  {% endif %}
+</div>

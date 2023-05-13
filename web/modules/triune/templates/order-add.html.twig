@@ -1,0 +1,25 @@
+<form class="order-form" action="/triune/order/add" method="post" id="order-form" accept-charset="UTF-8" {{ form.attributes }}>
+  <div style="display:none">
+    {{ form.order_id }}
+  </div>
+  {{ form.label }}
+  {{ form.office_id }}
+  {{ form.customer_id }}
+  {{ form.date }}
+  {{ form.shift }}
+  {{ form.start }} {{ form.end }} {{ form.depart }}
+  {{ form.quantity }}
+  {{ form.position }}
+  {{ form.pay_rate }}
+  {{ form.notes }}
+  
+  <div class="config-row buttons">
+    <div class="button-back"><a href="/triune/order/list" class="button form-submit">Cancel</a></div>
+    <div class="app-button">{{ form.submit }}</div>
+  </div>
+  
+  {{ form.actions.submit }}
+  {{ form.form_build_id }}
+  {{ form.form_token }}
+  {{ form.form_id }}
+</form>

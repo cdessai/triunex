@@ -1,0 +1,21 @@
+uuid: fef12e84-f007-40f2-8e61-9bcb26230ecd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_office
+  module:
+    - options
+    - user
+id: user.user.field_office
+field_name: field_office
+entity_type: user
+bundle: user
+label: Office
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

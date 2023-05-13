@@ -1,0 +1,23 @@
+uuid: 2ffc306c-d651-4553-b722-9fc71a1dbf03
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - triune2019
+_core:
+  default_config_hash: za-39d5WDUg6XvbyqSnuVYEeq6QM4qKJxW8MnoAha5A
+id: triune2019_search
+theme: triune2019
+region: disabled_blocks
+weight: -8
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: Search
+  label_display: visible
+  provider: search
+  page_id: ''
+visibility: {  }

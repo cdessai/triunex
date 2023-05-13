@@ -1,0 +1,117 @@
+{{ attach_library('triune/reports') }}
+<div {{ attributes }}>
+
+	<div id="block-projectdashboardtabs" class="contextual-region">
+      <ul class="report-tabs">
+        <li><a href="/triune/reports/difference">Difference Report</a></li>
+        <li><a href="/triune/reports/daily">Daily Report</a></li>
+        <li><a href="/triune/reports/weekly" class="is-active">Weekly Report</a></li>
+        <li><a href="/triune/notice/cr/list">Check Requests</a></li>
+        <li><a href="/triune/notice/dnr/list">DNR List</a></li>
+        <li><a href="/triune/notice/ar/list">Accident Report</a></li>
+      </ul>
+  </div>
+  
+  {% set office = variables.input_office %}
+  {% set shift = variables.input_shift %}
+
+  <header class="app-header">
+		<div class="header-title">
+			<h2>Week of {{ variables.date }} | {{ variables.offices[variables.input_office].label }} | {{ variables.shift_labels[shift] }}</h2>
+		</div>
+    <input type="date" id="weekly-report-date" name="report-date" value="{{ variables.input_date }}"></input>
+    
+    <select id="weekly-report-office" name="report-office">
+    {% for location in variables.offices %}
+      <option value="{{ location.location_id }}" {% if office == location.location_id %}selected="selected"{% endif %}>{{ location.label }}</option>
+    {% endfor %}
+    </select>
+    <select id="weekly-report-shift" name="report-shift">
+      <option value="0" {% if shift == 0 %}selected="selected"{% endif %}>All Shifts</option>
+      <option value="1" {% if shift == 1 %}selected="selected"{% endif %}>1st Shift</option>
+      <option value="2" {% if shift == 2 %}selected="selected"{% endif %}>2nd Shift</option>
+      <option value="3" {% if shift == 3 %}selected="selected"{% endif %}>3rd Shift</option>
+    </select>
+    <button type="button" id="weekly-report-download">CSV</button>
+	</header>
+  
+  <table id="msortTable0" class="tablesorter weekly-report-table" data-sorting="true">
+    <thead> 
+      <tr>
+        <th scope="col"></th>
+        <th scope="col" colspan="2">Monday</th>
+        <th scope="col" colspan="2">Tuesday</th>
+        <th scope="col" colspan="2">Wednesday</th>
+        <th scope="col" colspan="2">Thursday</th>
+        <th scope="col" colspan="2">Friday</th>
+        <th scope="col" colspan="2">Saturday</th>
+        <th scope="col" colspan="2">Sunday</th>
+        <th scope="col" colspan="2">Weekly Total</th>
+      </tr>
+      <tr>
+        <th scope="col">Customer</th>
+        <th scope="col">Ordered</th>
+        <th scope="col">Filled</th>
+        <th scope="col">Ordered</th>
+        <th scope="col">Filled</th>
+        <th scope="col">Ordered</th>
+        <th scope="col">Filled</th>
+        <th scope="col">Ordered</th>
+        <th scope="col">Filled</th>
+        <th scope="col">Ordered</th>
+        <th scope="col">Filled</th>
+        <th scope="col">Ordered</th>
+        <th scope="col">Filled</th>
+        <th scope="col">Ordered</th>
+        <th scope="col">Filled</th>
+        <th scope="col">Ordered</th>
+        <th scope="col">Filled</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for customer in customers %}
+      <tr>
+        <td>{{ customer.label }}</td>
+        <td>{{ customer.mon[office][shift].ordered }}</td>
+        <td>{{ customer.mon[office][shift].filled }}</td>
+        <td>{{ customer.tue[office][shift].ordered }}</td>
+        <td>{{ customer.tue[office][shift].filled }}</td>
+        <td>{{ customer.wed[office][shift].ordered }}</td>
+        <td>{{ customer.wed[office][shift].filled }}</td>
+        <td>{{ customer.thu[office][shift].ordered }}</td>
+        <td>{{ customer.thu[office][shift].filled }}</td>
+        <td>{{ customer.fri[office][shift].ordered }}</td>
+        <td>{{ customer.fri[office][shift].filled }}</td>
+        <td>{{ customer.sat[office][shift].ordered }}</td>
+        <td>{{ customer.sat[office][shift].filled }}</td>
+        <td>{{ customer.sun[office][shift].ordered }}</td>
+        <td>{{ customer.sun[office][shift].filled }}</td>
+        <td>{{ customer.week[office][shift].ordered }}</td>
+        <td>{{ customer.week[office][shift].filled }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    <tbody>
+      <tr class="grandtotal tablesorter-static">
+        <td>Grand Total</td>
+        <td>{{ total.mon[office][shift].ordered }}</td>
+        <td>{{ total.mon[office][shift].filled }}</td>
+        <td>{{ total.tue[office][shift].ordered }}</td>
+        <td>{{ total.tue[office][shift].filled }}</td>
+        <td>{{ total.wed[office][shift].ordered }}</td>
+        <td>{{ total.wed[office][shift].filled }}</td>
+        <td>{{ total.thu[office][shift].ordered }}</td>
+        <td>{{ total.thu[office][shift].filled }}</td>
+        <td>{{ total.fri[office][shift].ordered }}</td>
+        <td>{{ total.fri[office][shift].filled }}</td>
+        <td>{{ total.sat[office][shift].ordered }}</td>
+        <td>{{ total.sat[office][shift].filled }}</td>
+        <td>{{ total.sun[office][shift].ordered }}</td>
+        <td>{{ total.sun[office][shift].filled }}</td>
+        <td>{{ total.week[office][shift].ordered }}</td>
+        <td>{{ total.week[office][shift].filled }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

@@ -1,0 +1,25 @@
+name: Anttix Custom Theme
+type: theme
+description: 'The base template for custom Anttix themes for Drupal 8'
+core_version_requirement: ^8 || ^9
+base theme: false
+screenshot: anttix-custom.png
+logo: 'themes/triune2019/logo.png'
+libraries:
+  - triune2019/global-styling
+  - triune2019/cookie_consent
+  - triune2019/fonts
+  - triune2019/font_awesome
+  - triune2019/flexy_menu
+libraries-override:
+  classy/base: false
+stylesheets-remove:
+  - core/themes/stable/css/system/components/reset-appearance.module.css
+regions:
+  top_right: 'Top Bar Right'
+  main_menu: 'Main Menu'
+  search: 'Search Box'
+  breadcrumb: Breadcrumb
+  content: Content
+  footer_bottom: 'Footer Bottom Info'
+  disabled_blocks: 'Disabled Blocks'

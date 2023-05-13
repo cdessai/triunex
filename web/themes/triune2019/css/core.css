@@ -1,0 +1,742 @@
+/** General Page Styles **/
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  line-height: 2.0em;
+  color: #1b1b1b;
+  background-color: #efefef;
+  height:100%;
+}
+h1 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 2.1em;
+}
+h2 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  font-size: 1.8em;
+}
+h3 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+h4 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+hr {
+  border: 0;
+  height: 1px;
+  margin: 10px 0px 10px 0px;
+  background: #353739;
+}
+a {
+	text-decoration: none;
+	color: #020b44;
+}
+a:hover,
+a:focus {
+	color: #37c6f7;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.img-fl {
+	float: left;
+}
+.clear-fl {
+  visibility: hidden;
+	clear: both;
+  font-size: 0.00000001em;
+  height: 1px;
+  width: 1px;
+}
+
+/** File Attachment Icons **/
+.file--application-pdf {
+  padding-left: 25px;
+  background-image: url(img/pdf-icon.png);
+  background-repeat:no-repeat;
+}
+
+/** Table Styles **/
+table {
+  width: 100%;
+	margin: 5px 0 0 0;
+  border-collapse: collapse;
+  border: 1px solid #cccccc;
+}
+thead tr th {
+  padding: 5px 15px 5px 15px;
+  background-color: #020b46;
+  text-align: left;
+  font-weight: 600;
+  color: #ffffff;
+}
+thead tr th a {
+  color: #ffffcf;
+}
+thead tr th a:hover, thead tr th a:focus {
+  color: #ffffff;
+}
+thead tr td, tbody tr td {
+  padding: 5px 15px 5px 15px;
+  border: 1px solid #cccccc;
+}
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+tbody tr td input[type="text"],
+tbody tr td select {
+	padding: 5px 15px 5px 7px;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+}
+.min-col {
+	min-width: 135px;
+}
+
+/** Drupal alert message styles **/
+div[role=alert] {
+  margin: 0 0 15px 0;
+  padding: 5px 15px 5px 15px;
+  background: #ffffcf;
+  border: 1px solid #cccccc;
+}
+div[role=message],
+div[role=update] {
+  margin: 0 0 15px 0;
+  padding: 5px 15px 5px 15px;
+  background: #cfffd1;
+  border: 1px solid #cccccc;
+}
+
+/** Drupal Core Tab Styles **/
+#block-triune2019-local-tasks {
+  margin-bottom: -2px;
+  border-bottom: 1px solid #a3a3a3;
+}  
+#block-triune2019-local-tasks ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#block-triune2019-local-tasks ul li {
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+#block-triune2019-local-tasks ul li a {
+  padding: 5px 10px 5px 10px;
+  border-top: 1px solid #a3a3a3;
+  border-left: 1px solid #a3a3a3;
+  border-right: 1px solid #a3a3a3;
+  border-bottom: 1px solid #a3a3a3;
+  border-radius: 5px 5px 0 0;
+  background-color: #e4e4e4;
+}
+#block-triune2019-local-tasks ul li a.is-active {
+  background-color: #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+/*IE workaround*/
+/*All IE browsers*/
+* html #block-triune2019-local-tasks ul li {
+    border-left: 1px solid black;
+    padding: 0 0.4em 0 0.4em;
+    margin: 0 0.4em 0 -0.4em;
+}
+/*Win IE browsers - hide from Mac IE\*/
+* html #block-triune2019-local-tasks ul { height: 1%; }
+
+* html #block-triune2019-local-tasks ul li {
+    display: block;
+    float: left;
+}
+/*End hide*/
+/*Mac IE 5*/
+* html #block-triune2019-local-tasks ul li:first-child {
+    border-left: 0;
+}
+
+/** Drupal Breadcrumb Styles **/
+#block-triune2019-breadcrumbs {
+  width: 100%;
+  padding: 3px 10px 3px 10px;
+  box-sizing: border-box;
+  text-transform: capitalize;
+  font-size: 0.95em;
+  line-height: 1.3em;
+  color: #e1e1e1;
+}
+#block-triune2019-breadcrumbs ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#block-triune2019-breadcrumbs ol li {
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+#block-triune2019-breadcrumbs ol li:before {
+  content: " » ";
+}
+#block-triune2019-breadcrumbs ol li:first-child:before {
+  content: "";
+}
+#block-triune2019-breadcrumbs a {
+	text-decoration: none;
+	color: #020d45;
+}
+#block-triune2019-breadcrumbs a:hover,
+#block-triune2019-breadcrumbs a:focus {
+	color: #dd000b;
+}
+
+
+/** Drupal core pager styles **/
+.pager ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 0.8em;
+  }
+.pager ul li {
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+.pager ul li:before { content: " | "; }
+.pager ul li:first-child:before { content: ""; }
+/*IE workaround*/
+/*All IE browsers*/
+* html .pager ul li {
+    border-left: 1px solid #A3A3A3;
+    padding: 0 0.4em 0 0.4em;
+    margin: 0 0.4em 0 -0.4em;
+}
+/*Win IE browsers - hide from Mac IE\*/
+* html .pager ul { height: 1%; }
+
+* html .pager ul li {
+    display: block;
+    float: left;
+}
+/*End hide*/
+/*Mac IE 5*/
+* html .pager ul li:first-child {
+    border-left: 0;
+}
+
+/** Drupal Inline Field Styles **/
+.field--label-inline .field__label::after {
+  content: ": ";
+}
+.field--label-inline .field__label,
+.field--label-inline .field__item {
+  display: inline-block;
+}
+
+/** Drupal button styles **/
+.link {
+  display: inline;
+  cursor: pointer;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #0074bd;
+  text-decoration: none;
+  font-weight: bold;
+}
+.link:hover,
+.link:focus {
+  color: #008ee6;
+  text-decoration: underline;
+}
+.form-submit {
+	padding: 8px 25px 8px 25px;
+	border-radius: 3px;
+	border-collapse: collapse;
+	border: 0;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+	background: #000080;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 600;
+  font-size: 1.0em;
+	color: #ffffff;
+  cursor: pointer;  
+}
+.form-submit:hover,
+.form-submit:focus {
+	background: #37c6f7;
+	color: #000080;
+}
+@media screen and (max-width: 640px) {
+  .form-submit {
+    width: 100%;
+    margin: 1.5% 0 1.5% 0;
+  }
+}
+
+/** Call Sheet Form Styles **/
+.required-text {
+	color: #ff6961;
+}
+#call-sheet-form .js-form-item {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 6px 0px 6px 0px;
+}
+#call-sheet-form label {
+  flex-basis: 10%;
+  text-transform: capitalize;
+  color: #414142;
+}
+#call-sheet-form input[type="text"] {
+  flex-basis: 50%;
+  width: 50%;
+  height: 40px;
+  padding: 3px 3px 3px 5px;
+  outline: 0 none;
+  border: 1px solid #6E6F71;
+  box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  color: #888;
+}
+#call-sheet-form input[type="date"] {
+  flex-basis: 15%;
+  width: 15%;
+  height: 40px;
+  padding: 3px 3px 3px 5px;
+  outline: 0 none;
+  border: 1px solid #6E6F71;
+  box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  color: #888;
+}
+#call-sheet-form .js-form-type-textarea div {
+  flex-basis: 70%;
+}
+#call-sheet-form .js-form-type-textarea div.description {
+  flex-basis: 100%;
+  margin: 0 0 0 15%;
+  font-style: italic;
+}
+#call-sheet-form textarea {
+  width: 98%;
+  height: 120px;
+  padding: 5px 3px 3px 5px;
+  outline: 0 none;
+  border: 1px solid #6E6F71;
+  box-shadow: inset 0px 1px 4px #9d9d9d;  
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  color: #888;
+}
+#call-sheet-form .form-submit {
+	margin: 0 0 0 10%;
+}
+#edit-langcode-wrapper {
+  display: none;
+}
+#call-sheet-form .form-actions {
+  margin: 0 0 0 15%;
+}
+@media screen and (max-width: 640px) {
+  #call-sheet-form .js-form-item {
+    display: block;
+  }
+  #call-sheet-form .js-form-type-textarea div.description {
+    margin: 0;
+  }
+  #call-sheet-form .form-actions {
+    margin: 0 auto 0 auto;
+  }
+}
+
+/** Order Form Styles **/
+#order-form .js-form-item {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 6px 0px 6px 0px;
+}
+#order-form label {
+  flex-basis: 15%;
+  text-transform: capitalize;
+  color: #414142;
+}
+#order-form input[type="text"] {
+  flex-basis: 45%;
+  width: 45%;
+  height: 40px;
+  padding: 3px 3px 3px 5px;
+  outline: 0 none;
+  border: 1px solid #6E6F71;
+  box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  color: #121212;
+}
+#order-form select {
+  flex-basis: 25%;
+  width: 25%;
+  height: 40px;
+  padding: 3px 3px 3px 5px;
+  outline: 0 none;
+  border: 1px solid #6E6F71;
+  box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  color: #121212;
+}
+#order-form input[type="number"] {
+  flex-basis: 10%;
+  width: 10%;
+  height: 40px;
+  padding: 3px 3px 3px 5px;
+  outline: 0 none;
+  border: 1px solid #6E6F71;
+  box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  color: #121212;
+}
+#order-form input[type="date"] {
+  flex-basis: 15%;
+  width: 15%;
+  height: 40px;
+  padding: 3px 3px 3px 5px;
+  outline: 0 none;
+  border: 1px solid #6E6F71;
+  box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  color: #121212;
+}
+#order-form .js-form-type-textarea div {
+  flex-basis: 70%;
+}
+#order-form .js-form-type-textarea div.description {
+  flex-basis: 100%;
+  margin: 0 0 0 15%;
+  font-style: italic;
+}
+#order-form textarea {
+  width: 98%;
+  height: 120px;
+  padding: 5px 3px 3px 5px;
+  outline: 0 none;
+  border: 1px solid #6E6F71;
+  box-shadow: inset 0px 1px 4px #9d9d9d;  
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  color: #888;
+}
+#order-form .form-actions {
+  margin: 0 0 0 15%;
+}
+@media screen and (max-width: 640px) {
+  #order-form .js-form-item {
+    display: block;
+  }
+  #order-form .js-form-type-textarea div.description {
+    margin: 0;
+  }
+  #order-form .form-actions {
+    margin: 0 auto 0 auto;
+  }
+}
+
+/** Triune Customer Edit Form Styles **/
+#triune-customer-edit-form .js-form-item {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 6px 0px 6px 0px;
+}
+#triune-customer-edit-form label {
+  flex-basis: 15%;
+  text-transform: capitalize;
+  color: #414142;
+}
+#triune-customer-edit-form input[type="text"] {
+  flex-basis: 45%;
+  width: 45%;
+  height: 40px;
+  padding: 3px 3px 3px 5px;
+  outline: 0 none;
+  border: 1px solid #6E6F71;
+  box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  color: #121212;
+}
+#edit-office-id--description {
+	padding: 2px 0 0 15px;
+}
+#triune-customer-edit-form select {
+  flex-basis: 25%;
+  width: 25%;
+  height: 40px;
+  padding: 3px 3px 3px 5px;
+  outline: 0 none;
+  border: 1px solid #6E6F71;
+  box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  color: #121212;
+}
+#triune-customer-edit-form .js-form-type-textarea div {
+  flex-basis: 70%;
+}
+#triune-customer-edit-form .js-form-type-textarea label {
+  flex-basis: 29%;
+}
+#triune-customer-edit-form .js-form-type-textarea div.description {
+  flex-basis: 100%;
+  margin: 0 0 0 15%;
+  font-style: italic;
+}
+#triune-customer-edit-form textarea {
+  width: 98%;
+  height: 120px;
+  padding: 5px 3px 3px 5px;
+  outline: 0 none;
+  border: 1px solid #6E6F71;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  color: #121212;
+}
+#triune-customer-edit-form #edit-emails-0-format {
+	display: none;
+}
+#triune-customer-edit-form .form-actions {
+  margin: 0 0 0 15%;
+}
+@media screen and (max-width: 640px) {
+  #triune-customer-edit-form .js-form-item {
+    display: block;
+  }
+  #triune-customer-edit-form .js-form-type-textarea div.description {
+    margin: 0;
+  }
+  #triune-customer-edit-form .form-actions {
+    margin: 0 auto 0 auto;
+  }
+}
+
+/** Notice Form Styles **/
+.notice-form .js-form-item {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 6px 0px 6px 0px;
+}
+.notice-form label {
+  flex-basis: 10%;
+  text-transform: capitalize;
+  color: #414142;
+}
+.notice-form input[type="text"] {
+  flex-basis: 45%;
+  width: 45%;
+  height: 40px;
+  padding: 3px 3px 3px 5px;
+  outline: 0 none;
+  border: 1px solid #6E6F71;
+  box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  color: #121212;
+}
+.notice-form select {
+  flex-basis: 25%;
+  width: 25%;
+  height: 40px;
+  padding: 3px 3px 3px 5px;
+  outline: 0 none;
+  border: 1px solid #6E6F71;
+  box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  color: #121212;
+}
+.notice-form .js-form-type-textarea div {
+  flex-basis: 70%;
+}
+.notice-form .js-form-type-textarea div.description {
+  flex-basis: 100%;
+  margin: 0 0 0 15%;
+  font-style: italic;
+}
+.notice-form textarea {
+  width: 98%;
+  height: 120px;
+  padding: 5px 3px 3px 5px;
+  outline: 0 none;
+  border: 1px solid #6E6F71;
+  box-shadow: inset 0px 1px 4px #9d9d9d;  
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 1.0em;
+  color: #888;
+}
+.notice-form .form-submit {
+	margin: 0 0 0 10%;
+}
+.notice-form .form-actions {
+  margin: 0 0 0 10%;
+}
+@media screen and (max-width: 640px) {
+  .notice-form .js-form-item {
+    display: block;
+  }
+  .notice-form .js-form-type-textarea div.description {
+    margin: 0;
+  }
+  .notice-form .form-actions {
+    margin: 0 auto 0 auto;
+  }
+}
+
+/** User Login Form Styles **/
+.user-login-form label {
+  display: inline-block;
+  min-width: 95px;
+  margin: 10px 5px 0 0;
+  font-family: 'Roboto Condensed', sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #414142;
+}
+.user-login-form input[type="text"], .user-login-form input[type="password"] {
+  border: 1px solid #6E6F71;
+  color: #888;
+  height: 30px;
+  margin: 5px 0px 5px 0px;
+  outline: 0 none;
+  padding: 5px;
+  width: 70%;
+  font-size: 12px;
+  line-height:15px;
+  box-shadow: inset 0px 1px 4px #9d9d9d;
+  font-family: 'Roboto', serif;
+  font-weight: 400;
+}
+
+/** Node Add/Edit Form Styles **/
+.node-form, .node-form details {
+  width: 100%;
+  padding: 10px 15px 10px 15px;
+  border: 1px solid #a6a6a6;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+.vertical-tabs {
+  background-color: #ffffff;
+}
+details.vertical-tabs__pane {
+  border: 0;
+}
+.node-form label {
+  display: inline-block;
+  width: 12%;
+  margin: 10px 5px 0 0;
+  font-family: 'Roboto Condensed', sans-serif;
+  text-transform: capitalize;
+  font-weight: 600;
+  color: #414142;
+}
+.js-form-type-textarea label {
+  width: 100%;
+}
+.node-form label.option {
+  text-transform: capitalize;
+  font-family: 'Roboto', serif;
+  font-weight: 400;
+}
+.node-form .fieldset-legend {
+  font-family: 'Roboto Condensed', sans-serif;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+.node-form details summary {
+  font-family: 'Roboto Condensed', sans-serif;
+  text-transform: capitalize;
+  font-weight: 600;
+  cursor: pointer;
+}
+.node-form .description {
+  font-size: 0.85em;
+}
+.views-exposed-form {
+  display: flex;
+  border: 1px solid #cccccc;
+}
+.views-exposed-form div {
+  padding: 5px;
+}
+.image-widget img {
+  float: left;
+  margin: 20px 15px 0 0;
+}
+.form-item-body-0-format label {
+  margin: 10px 5px 0 15px;
+}
+.field--type-datetime h4 {
+  margin: 0;
+}
+.node-form input[type="text"],
+.node-form select {
+  border: 1px solid #6E6F71;
+  height: 30px;
+  margin: 5px 0px 5px 0px;
+  outline: 0 none;
+  padding: 5px;
+  width: 70%;
+  font-size: 12px;
+  line-height:15px;
+  box-shadow: inset 0px 1px 4px #9d9d9d;
+  font-family: 'Roboto', serif;
+  font-weight: 400;
+  color: #171717;
+}
+.node-form input[type="date"] {
+  border: 1px solid #6E6F71;
+  height: 30px;
+  margin: 0 0px 5px 0px;
+  outline: 0 none;
+  padding: 5px;
+  font-size: 12px;
+  line-height:15px;
+  box-shadow: inset 0px 1px 4px #9d9d9d;
+  font-family: 'Roboto', serif;
+  font-weight: 400;
+  color: #171717;
+}

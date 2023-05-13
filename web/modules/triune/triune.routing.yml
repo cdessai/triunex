@@ -1,0 +1,770 @@
+###############
+# TEST Routes #
+###############
+# Ascentis API
+
+triune.ascentis.import.request:
+  path: '/ascentis/import/request'
+  defaults:
+    _controller: '\Drupal\triune\Controller\AscentisAPIController::requestImport'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.ascentis.import.employees:
+  path: '/ascentis/import/employees/{id}'
+  defaults:
+    _controller: '\Drupal\triune\Controller\AscentisAPIController::importEmployees'
+    _title: ''
+    passive: false
+    verbose: false
+  requirements:
+    _permission: 'access_application'
+
+
+triune.ascentis.import.single:
+  path: '/ascentis/import/single/{employee_id}'
+  defaults:
+    _controller: '\Drupal\triune\Controller\AscentisAPIController::importEmployeeSingle'
+    _title: ''
+    passive: false
+    verbose: false
+  requirements:
+    _permission: 'access_application'
+
+triune.ascentis.import.employees.verbose:
+  path: '/ascentis/import/employees/{id}/verbose'
+  defaults:
+    _controller: '\Drupal\triune\Controller\AscentisAPIController::importEmployees'
+    _title: ''
+    passive: true
+    verbose: true
+  requirements:
+    _permission: 'access_application'
+
+triune.ascentis.import.single.verbose:
+  path: '/ascentis/import/single/{employee_id}/verbose'
+  defaults:
+    _controller: '\Drupal\triune\Controller\AscentisAPIController::importEmployeeSingle'
+    _title: ''
+    passive: true
+    verbose: true
+  requirements:
+    _permission: 'access_application'
+
+triune.ascentis.import.override:
+  path: '/ascentis/import/override'
+  defaults:
+    _controller: '\Drupal\triune\Controller\AscentisAPIController::manualEmployeeUpdate'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+# DEV functions: Database Schema & Entity definition update function
+triune.entity.schema.fieldcheck:
+  path: '/triune/entity/{entity}/field/{field}/check'
+  defaults:
+    _controller: '\Drupal\triune\Controller\TriuneSchemaController::schemaFieldCheck'
+    _title: ''
+    verbose: true
+  requirements:
+    _permission: 'administer users'
+
+triune.entity.schema.order.update:
+  path: '/triune/entity/order/update'
+  defaults:
+    _controller: '\Drupal\triune\Controller\TriuneSchemaController::triune_order_entity_update'
+    _title: ''
+  requirements:
+    _permission: 'administer users'
+
+#####################
+# Controller Routes #
+#####################
+# Order routes
+triune.order.list:
+  path: '/triune/order/list'
+  defaults:
+    _controller: '\Drupal\triune\Controller\OrderController::listOrders'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.order.status.list:
+  path: '/triune/order/list/{order_status}'
+  defaults:
+    _controller: '\Drupal\triune\Controller\OrderController::listOrders'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.order.add:
+  path: '/triune/order/add'
+  defaults:
+    _controller: '\Drupal\triune\Controller\OrderController::addOrder'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.order.edit:
+  path: '/triune/order/{order_id}/edit'
+  defaults:
+    _controller: '\Drupal\triune\Controller\OrderController::editOrder'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.order.view:
+  path: '/triune/order/{order_id}/view'
+  defaults:
+    _controller: '\Drupal\triune\Controller\OrderController::viewOrder'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.order.delete:
+  path: '/triune/order/{order_id}/delete'
+  defaults:
+    _controller: '\Drupal\triune\Controller\OrderController::deleteOrder'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.order.copy:
+  path: '/triune/order/{order_id}/copy'
+  defaults:
+    _controller: '\Drupal\triune\Controller\OrderController::copyOrder'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.order.update:
+  path: '/triune/order/{order_id}/update/{status}'
+  defaults:
+    _controller: '\Drupal\triune\Controller\OrderController::updateOrder'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.order.email:
+  path: '/triune/order/{order_id}/email'
+  defaults:
+    _controller: '\Drupal\triune\Controller\OrderController::emailOrderReport'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+# Order Employee routes
+triune.order.employee.add.called:
+  path: '/triune/order/{order_id}/employee/add-called'
+  defaults:
+    _controller: '\Drupal\triune\Controller\OrderController::addOrderEmployeeListCalled'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.order.employee.add.all:
+  path: '/triune/order/{order_id}/employee/add-all'
+  defaults:
+    _controller: '\Drupal\triune\Controller\OrderController::addOrderEmployeeListAll'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.order.employee.edit:
+  path: '/triune/order/{order_id}/employee/{employee_id}/edit'
+  defaults:
+    _controller: '\Drupal\triune\Controller\OrderController::editOrderEmployee'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.order.employee.delete:
+  path: '/triune/order/{order_id}/employee/{employee_id}/delete'
+  defaults:
+    _controller: '\Drupal\triune\Controller\OrderController::deleteOrderEmployee'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.order.employee.update:
+  path: '/triune/order/{order_id}/employee/{employee_id}/update/{field}/{value}'
+  defaults:
+    _controller: '\Drupal\triune\Controller\OrderController::updateOrderEmployee'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.order.employee.updatebulk:
+  path: '/triune/order/{order_id}/employee/updatebulk'
+  defaults:
+    _controller: '\Drupal\triune\Controller\OrderController::bulkupdateOrderEmployee'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.order.employee.correct:
+  path: '/triune/orderemployee/correct'
+  defaults:
+    _controller: '\Drupal\triune\Controller\EmployeeController::fixOrderEmployeeOffice'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+# Call Sheet routes
+triune.callsheet.list:
+  path: '/triune/callsheet/list'
+  defaults:
+    _controller: '\Drupal\triune\Controller\CallSheetController::listCallSheets'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.callsheet.add:
+  path: '/triune/callsheet/add'
+  defaults:
+    _controller: '\Drupal\triune\Controller\CallSheetController::addCallSheet'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.callsheet.edit:
+  path: '/triune/callsheet/{callsheet_id}/edit'
+  defaults:
+    _controller: '\Drupal\triune\Controller\CallSheetController::editCallSheet'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.callsheet.view:
+  path: '/triune/callsheet/{callsheet_id}/view'
+  defaults:
+    _controller: '\Drupal\triune\Controller\CallSheetController::viewCallSheet'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.callsheet.delete:
+  path: '/triune/callsheet/{callsheet_id}/delete'
+  defaults:
+    _controller: '\Drupal\triune\Controller\CallSheetController::deleteCallSheet'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+
+# Call Sheet Employee routes
+triune.callsheet.employee.add:
+  path: '/triune/callsheet/{callsheet_id}/employee/add'
+  defaults:
+    _controller: '\Drupal\triune\Controller\CallSheetController::addCallSheetEmployee'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.callsheet.employee.edit:
+  path: '/triune/callsheet/{callsheet_id}/employee/{employee_id}/edit'
+  defaults:
+    _controller: '\Drupal\triune\Controller\CallSheetController::editCallSheetEmployee'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.callsheet.employee.assign:
+  path: '/triune/callsheet/{callsheet_id}/employee/{employee_id}/assign/{date}/{shift}'
+  defaults:
+    _controller: '\Drupal\triune\Controller\CallSheetController::assignCallSheetEmployee'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.callsheet.employee.delete:
+  path: '/triune/callsheet/{callsheet_id}/employee/{employee_id}/delete'
+  defaults:
+    _controller: '\Drupal\triune\Controller\CallSheetController::deleteCallSheetEmployee'
+  requirements:
+    _permission: 'access_application'
+
+###################
+# Employee Routes #
+###################
+triune.employee.list:
+  path: '/triune/employee/list'
+  defaults:
+    _controller: '\Drupal\triune\Controller\EmployeeController::listEmployees'
+  requirements:
+    _permission: 'access_application'
+
+triune.employee.edit:
+  path: '/triune/employee/{employee_id}/edit'
+  defaults:
+    _controller: '\Drupal\triune\Controller\EmployeeController::editEmployee'
+  requirements:
+    _permission: 'edit_employees'
+
+triune.employee.add:
+  path: '/triune/employee/add'
+  defaults:
+    _controller: '\Drupal\triune\Controller\EmployeeController::addEmployee'
+  requirements:
+    _permission: 'edit_employees'
+
+# Report routes
+triune.reports.daily:
+  path: '/triune/reports/daily'
+  defaults:
+    _controller: '\Drupal\triune\Controller\NoticeController::viewDailyReport'
+    _title: ''
+  requirements:
+    _permission: 'view_reports'
+
+triune.reports.difference:
+  path: '/triune/reports/difference'
+  defaults:
+    _controller: '\Drupal\triune\Controller\NoticeController::viewDifferenceReport'
+    _title: ''
+  requirements:
+    _permission: 'view_reports'
+
+triune.reports.weekly:
+  path: '/triune/reports/weekly'
+  defaults:
+    _controller: '\Drupal\triune\Controller\NoticeController::viewWeeklyReport'
+    _title: ''
+  requirements:
+    _permission: 'view_reports'
+
+triune.reports.weekly.download:
+  path: '/triune/reports/weekly-download'
+  defaults:
+    _controller: '\Drupal\triune\Controller\NoticeController::downloadWeeklyReport'
+    _title: ''
+  requirements:
+    _permission: 'view_reports'
+
+# Notice routes
+triune.notice.list:
+  path: '/triune/notice/{type}/list'
+  defaults:
+    _controller: '\Drupal\triune\Controller\NoticeController::listNotices'
+    _title: ''
+  requirements:
+    _permission: 'view_reports'
+
+triune.notice.add:
+  path: '/triune/notice/{type}/add'
+  defaults:
+    _controller: '\Drupal\triune\Controller\NoticeController::addNotice'
+    _title: ''
+  requirements:
+    _permission: 'view_reports'
+
+triune.notice.edit:
+  path: '/triune/notice/{type}/{notice_id}/edit'
+  defaults:
+    _controller: '\Drupal\triune\Controller\NoticeController::editNotice'
+    _title: ''
+  requirements:
+    _permission: 'view_reports'
+
+triune.notice.delete:
+  path: '/triune/notice/{notice_id}/delete'
+  defaults:
+    _controller: '\Drupal\triune\Controller\NoticeController::deleteNotice'
+  requirements:
+    _permission: 'view_reports'
+
+# Customer routes
+triune.customer.list:
+  path: '/triune/customer/list'
+  defaults:
+    _controller: '\Drupal\triune\Controller\CustomerController::listCustomers'
+    _title: ''
+  requirements:
+    _permission: 'edit_customers'
+
+triune.customer.add:
+  path: '/triune/customer/add'
+  defaults:
+    _controller: '\Drupal\triune\Controller\CustomerController::addCustomer'
+    _title: ''
+  requirements:
+    _permission: 'edit_customers'
+
+triune.customer.edit:
+  path: '/triune/customer/{customer_id}/edit'
+  defaults:
+    _controller: '\Drupal\triune\Controller\CustomerController::editCustomer'
+    _title: ''
+  requirements:
+    _permission: 'edit_customers'
+
+triune.customer.delete:
+  path: '/triune/customer/{customer_id}/delete'
+  defaults:
+    _controller: '\Drupal\triune\Controller\CustomerController::deleteCustomer'
+  requirements:
+    _permission: 'edit_customers'
+
+# JobRate routes
+triune.jobrate.list:
+  path: '/triune/payroll/list'
+  defaults:
+    _controller: '\Drupal\triune\Controller\JobRateController::listJobRates'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.jobrate.add:
+  path: '/triune/jobrate/add'
+  defaults:
+    _controller: '\Drupal\triune\Controller\JobRateController::addJobRate'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.jobrate.edit:
+  path: '/triune/jobrate/{jobrate_id}/edit'
+  defaults:
+    _controller: '\Drupal\triune\Controller\JobRateController::editJobRate'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.jobrate.view:
+  path: '/triune/jobrate/{jobrate_id}/view'
+  defaults:
+    _controller: '\Drupal\triune\Controller\JobRateController::viewJobRate'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+triune.jobrate.delete:
+  path: '/triune/jobrate/{jobrate_id}/delete'
+  defaults:
+    _controller: '\Drupal\triune\Controller\JobRateController::deleteJobRate'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+##############
+# AJAX Calls #
+##############
+
+# Employee routes
+triune.employee.info:
+  path: '/triune/employee/{resource_id}/info'
+  defaults:
+    _controller: '\Drupal\triune\Controller\EmployeeController::getResourceData'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+trune.callsheet.employee.info:
+  path: '/triune/callsheet/{callsheet_id}/employee/{employee_id}/info'
+  defaults:
+    _controller: '\Drupal\triune\Controller\CallSheetController::ajaxCallSheetEmployeeData'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+
+#################
+# Entity Routes #
+#################
+
+# Order management pages.
+triune.entity.order.collection:
+  path: '/triune/entity/order/list'
+  defaults:
+    _entity_list: 'triune_order'
+    _title: 'Order List'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.order.add:
+  path: '/triune/entity/order/add'
+  defaults:
+    _entity_form: 'triune_order.add'
+    _title: 'Add an Order'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.order.edit:
+  path: '/triune/entity/order/{triune_order}/edit'
+  defaults:
+    _entity_form: 'triune_order.edit'
+    _title: 'Order Details'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.order.delete:
+  path: '/triune/entity/order/{triune_order}/delete'
+  defaults:
+    _entity_form: 'triune_order.delete'
+    _title: 'Delete Order'
+  requirements:
+    _permission: 'access_application'
+
+# Office management pages.
+triune.entity.office.collection:
+  path: '/triune/entity/office/list'
+  defaults:
+    _entity_list: 'triune_office'
+    _title: 'Office List'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.office.add:
+  path: '/triune/entity/office/add'
+  defaults:
+    _entity_form: 'triune_office.add'
+    _title: 'Add an Office'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.office.edit:
+  path: '/triune/entity/office/{triune_office}/edit'
+  defaults:
+    _entity_form: 'triune_office.edit'
+    _title: 'Office Details'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.office.delete:
+  path: '/triune/entity/office/{triune_office}/delete'
+  defaults:
+    _entity_form: 'triune_office.delete'
+    _title: 'Delete Office'
+  requirements:
+    _permission: 'access_application'
+
+# Notice management pages.
+triune.entity.notice.collection:
+  path: '/triune/entity/notice/list'
+  defaults:
+    _entity_list: 'triune_notice'
+    _title: 'Notice List'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.notice.add:
+  path: '/triune/entity/notice/add'
+  defaults:
+    _entity_form: 'triune_notice.add'
+    _title: 'Add a Notice'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.notice.edit:
+  path: '/triune/entity/notice/{triune_notice}/edit'
+  defaults:
+    _entity_form: 'triune_notice.edit'
+    _title: 'Notice Details'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.notice.delete:
+  path: '/triune/entity/notice/{triune_notice}/delete'
+  defaults:
+    _entity_form: 'triune_notice.delete'
+    _title: 'Delete Notice'
+  requirements:
+    _permission: 'access_application'
+
+# Employee management pages.
+triune.entity.employee.collection:
+  path: '/triune/entity/employee/list'
+  defaults:
+    _entity_list: 'triune_employee'
+    _title: 'Employee List'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.employee.add:
+  path: '/triune/entity/employee/add'
+  defaults:
+    _entity_form: 'triune_employee.add'
+    _title: 'Add a Employee'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.employee.edit:
+  path: '/triune/entity/employee/{triune_employee}/edit'
+  defaults:
+    _entity_form: 'triune_employee.edit'
+    _title: 'Employee Details'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.employee.delete:
+  path: '/triune/entity/employee/{triune_employee}/delete'
+  defaults:
+    _entity_form: 'triune_employee.delete'
+    _title: 'Delete Employee'
+  requirements:
+    _permission: 'access_application'
+
+# OrderEmployee management pages.
+triune.entity.order_employee.collection:
+  path: '/triune/entity/order_employee/list'
+  defaults:
+    _entity_list: 'triune_order_employee'
+    _title: 'Order Employee List'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.order_employee.add:
+  path: '/triune/entity/order_employee/add'
+  defaults:
+    _entity_form: 'triune_order_employee.add'
+    _title: 'Add an Order Employee'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.order_employee.edit:
+  path: '/triune/entity/order_employee/{triune_order_employee}/edit'
+  defaults:
+    _entity_form: 'triune_order_employee.edit'
+    _title: 'Order Employee Details'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.order_employee.delete:
+  path: '/triune/entity/order_employee/{triune_order_employee}/delete'
+  defaults:
+    _entity_form: 'triune_order_employee.delete'
+    _title: 'Delete Order Employee'
+  requirements:
+    _permission: 'access_application'
+
+# Customer management pages.
+triune.entity.customer.collection:
+  path: '/triune/entity/customer/list'
+  defaults:
+    _entity_list: 'triune_customer'
+    _title: 'Customer List'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.customer.add:
+  path: '/triune/entity/customer/add'
+  defaults:
+    _entity_form: 'triune_customer.add'
+    _title: 'Add a Customer'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.customer.edit:
+  path: '/triune/entity/customer/{triune_customer}/edit'
+  defaults:
+    _entity_form: 'triune_customer.edit'
+    _title: 'Customer Details'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.customer.delete:
+  path: '/triune/entity/customer/{triune_customer}/delete'
+  defaults:
+    _entity_form: 'triune_customer.delete'
+    _title: 'Delete Customer'
+  requirements:
+    _permission: 'access_application'
+
+# CallSheet management pages.
+triune.entity.callsheet.collection:
+  path: '/triune/entity/callsheet/list'
+  defaults:
+    _entity_list: 'triune_callsheet'
+    _title: 'Call Sheet List'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.callsheet.add:
+  path: '/triune/entity/callsheet/add'
+  defaults:
+    _entity_form: 'triune_callsheet.add'
+    _title: 'Add a Call Sheet'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.callsheet.edit:
+  path: '/triune/entity/callsheet/{triune_callsheet}/edit'
+  defaults:
+    _entity_form: 'triune_callsheet.edit'
+    _title: 'Call Sheet Details'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.callsheet.delete:
+  path: '/triune/entity/callsheet/{triune_callsheet}/delete'
+  defaults:
+    _entity_form: 'triune_callsheet.delete'
+    _title: 'Delete Call Sheet'
+  requirements:
+    _permission: 'access_application'
+
+# CallSheetEmployee management pages.
+triune.entity.callsheet_employee.collection:
+  path: '/triune/entity/callsheet_employee/list'
+  defaults:
+    _entity_list: 'triune_callsheet_employee'
+    _title: 'Call Sheet List'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.callsheet_employee.add:
+  path: '/triune/entity/callsheet_employee/add'
+  defaults:
+    _entity_form: 'triune_callsheet_employee.add'
+    _title: 'Add a Call Sheet Employee'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.callsheet_employee.edit:
+  path: '/triune/entity/callsheet_employee/{triune_callsheet_employee}/edit'
+  defaults:
+    _entity_form: 'triune_callsheet_employee.edit'
+    _title: 'Call Sheet Employee Details'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.callsheet_employee.delete:
+  path: '/triune/entity/callsheet_employee/{triune_callsheet_employee}/delete'
+  defaults:
+    _entity_form: 'triune_callsheet_employee.delete'
+    _title: 'Delete Call Sheet Employee'
+  requirements:
+    _permission: 'access_application'
+
+# JobRate management pages.
+triune.entity.jobrate.collection:
+  path: '/triune/entity/jobrate/list'
+  defaults:
+    _entity_list: 'triune_jobrate'
+    _title: 'PayRoll List'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.jobrate.add:
+  path: '/triune/entity/jobrate/add'
+  defaults:
+    _entity_form: 'triune_jobrate.add'
+    _title: 'Add a PayRoll'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.jobrate.edit:
+  path: '/triune/entity/jobrate/{triune_jobrate}/edit'
+  defaults:
+    _entity_form: 'triune_jobrate.edit'
+    _title: 'PayRoll Details'
+  requirements:
+    _permission: 'access_application'
+
+triune.entity.jobrate.delete:
+  path: '/triune/entity/jobrate/{triune_jobrate}/delete'
+  defaults:
+    _entity_form: 'triune_jobrate.delete'
+    _title: 'Delete PayRoll'
+  requirements:
+    _permission: 'access_application'

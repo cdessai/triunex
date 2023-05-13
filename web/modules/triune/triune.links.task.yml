@@ -1,0 +1,34 @@
+entity.triune_office.collection_tab:
+  route_name: entity.triune_office.collection
+  base_route: system.admin_content
+  title: 'Offices'
+
+entity.triune_employee.collection_tab:
+  route_name: entity.triune_employee.collection
+  base_route: system.admin_content
+  title: 'Employees'
+  
+entity.triune_customer.collection_tab:
+  route_name: entity.triune_customer.collection
+  base_route: system.admin_content
+  title: 'Customers'
+  
+entity.triune_callsheet.collection_tab:
+  route_name: entity.triune_callsheet.collection
+  base_route: system.admin_content
+  title: 'Call Sheets'
+  
+entity.triune_callsheet_employee.collection_tab:
+  route_name: entity.triune_callsheet_employee.collection
+  base_route: system.admin_content
+  title: 'Call Sheet Employees'
+  
+entity.triune_order.collection_tab:
+  route_name: entity.triune_order.collection
+  base_route: system.admin_content
+  title: 'Orders'
+  
+entity.triune_order_employee.collection_tab:
+  route_name: entity.triune_order_employee.collection
+  base_route: system.admin_content
+  title: 'Order Employees'

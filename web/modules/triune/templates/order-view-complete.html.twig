@@ -1,0 +1,185 @@
+{{ attach_library('triune/order') }}
+<script>
+  confirmation = function() {
+    return confirm("Are you sure you want to send email to {{ order.email }}?");
+  }
+</script>
+
+<div {{ attributes }}>
+  
+  <div class="app-info">
+		<div class="ai-sec01">
+			<strong class="tl-blue">Complete Order</strong><br>
+			<strong>Label:</strong> {{ order.label.value }}<br>
+			<strong>Customer:</strong> {{ order.customer.label.value }}<br>
+      <strong>Address:</strong> {{ order.customer.address.value }}<br>
+      <strong>Driver:</strong> {{ order.driver }}
+    </div>
+		<div class="ai-sec02">
+      <br>
+      <strong>ID#:</strong> {{ order.id.value }}<br>
+			<strong>Date:</strong> {{ order.date.value|date("M d, Y") }}<br>
+      <strong>Time:</strong> {{ order.start_time }} - {{ order.end_time }}<br>
+			<strong>Shift:</strong> {{ order.shift.value }}
+    </div>
+    {# Displays Supervisor Details based on shifts #}
+    <div class="ai-sec04">
+      <strong class="tl-blue">
+        Supervisor Details
+      </strong><br>
+      {% if order.shift.value == 1 %}
+        <strong>Name: {{ order.customer.s1_name.value }}</strong><br/>
+        <strong>Phone: {{ order.customer.s1_phone.value }}</strong><br/>
+        <strong>Email: {{ order.s1_email }}</strong><br/>
+      {% elseif order.shift.value == 2 %}
+        <strong>Name: {{ order.customer.s2_name.value }}</strong><br/>
+        <strong>Phone: {{ order.customer.s2_phone.value }}</strong><br/>
+        <strong>Email: {{ order.s2_email }}</strong><br/>
+      {% else %}
+        <strong>Name: {{ order.customer.s3_name.value }}</strong><br/>
+        <strong>Phone: {{ order.customer.s3_phone.value }}</strong><br/>
+        <strong>Email: {{ order.s3_email }}</strong><br/>
+      {% endif %}
+    </div>
+    {% set notes = order.notes_value|trim %}
+    {% if notes|length %}
+    <div class="ai-sec03">
+      <div class="note-block">
+        <strong>Notes:</strong>
+        <p>{{ notes }}</p>
+      </div>
+    </div>
+    {% else %}
+    <div class="ai-sec03">&nbsp;</div>
+    {% endif %}
+  </div>
+	
+  <header class="app-header">
+		<div class="header-title">
+			<h2>Resources</h2>
+		</div>
+		<div class="app-links">
+			<a href="/triune/order/{{ order.id.value }}/copy"><i class="fas fa-plus-circle">&nbsp;</i> Copy Order</a>
+			<a href="/triune/order/{{ order.id.value }}/update/active"><i class="fas fa-folder-open">&nbsp;</i> Reactivate Order</a>
+      {#<a href="https://www.printfriendly.com/print?url={{ app.request.pathinfo }}" class="printfriendly" onclick="window.print(); return false;" title="Printer Friendly, PDF &amp; Email" data-pf_style_display="inline" data-pf_style_visibility="visible"><i class="fas fa-envelope">&nbsp;</i> Customer Report</a>#}
+      <a href="https://www.printfriendly.com/print?url={{ path_info }}" class="printfriendly" onclick="window.print(); return false;" title="Printer Friendly, PDF &amp; Email" data-pf_style_display="inline" data-pf_style_visibility="visible"><i class="fas fa-envelope">&nbsp;</i> Customer Report</a>
+		</div>
+	</header>
+	
+  <table id="msortTable2" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th scope="col">Attendance</th>
+        <th scope="col">Employee ID</th>
+        <th scope="col" class="sort">Employee Name</th>
+        <th scope="col">Office</th>
+        <th scope="col">Job</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% set employee_present_n = 0 %}
+    {% for i in 1..order.quantity.value %}
+      {% set j = i-1 %}
+      {% if variables.employee_list[j] %}
+      {% set employee = variables.employee_list[j] %}
+      <tr>
+        <td>{% if employee.present %}
+            <i class="fas fa-user-check">&nbsp;</i> Present
+            {% set employee_present_n = employee_present_n + 1 %}
+          {% else %}
+            <i class="fas fa-user-times">&nbsp;</i> Absent
+          {% endif %}</td>
+        <td>{{ employee.resource_id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.office }}</td>
+        <td>{{ employee.job }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      {% endif %}
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="config-row buttons">
+    <div class="button-back"><a href="/triune/order/list/complete" class="button form-submit">Return</a></div>
+  </div>
+
+</div>
+
+{# Printfriendly Content #}
+<div class="print-only">
+
+    
+    <header class="app-header">
+      <div class="header-title">
+        <h2>Customer Order ID: #{{ order.id.value }}</h2>
+      </div>
+      
+    </header>
+
+    <div class="app-info">
+      <div class="ai-sec01">
+        <strong>Customer:</strong> {{ order.customer.label.value }}<br>
+        <strong>Date:</strong> {{ order.date.value|date("M d, Y") }}<br>
+        <strong>Shift:</strong> {{ order.shift.value }}<br>
+        <strong>Time:</strong> {{ order.start_time }} - {{ order.end_time }}<br>
+        <strong>Order Qty:</strong> {{ employee_present_n }}
+      </div>
+    </div>
+    
+    <table id="msortTable0" class="tablesorter" data-sorting="true">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Employee Name</th>
+          <th scope="col" class="pf-id-line">Position</th>
+          <th scope="col" class="pf-id-line">Employee ID</th>
+          <th scope="col" class="pf-time-line">Time In</th>
+          <th scope="col" class="pf-time-line">Time Out</th>
+          <th scope="col" class="pf-signature-line">Signature</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for i in 1..order.quantity.value %}
+        {% set j = i-1 %}
+        {% if variables.employee_list[j] %}
+        {% set employee = variables.employee_list[j] %}
+          {% if employee.present %}
+          <tr>
+            <td>{{ i }}</td>
+            <td>{{ employee.name }}</td>
+            <td class="pf-time-line">&nbsp;{{employee.job}}</td>
+            <td class="pf-id-line">{{ employee.resource_id }}</td>
+            <td class="pf-time-line">&nbsp;</td>
+            <td class="pf-time-line">&nbsp;</td>
+            <td class="pf-signature-line">&nbsp;</td>
+          </tr>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      </tbody>
+    </table>
+    {% set notes = order.notes_value|trim %}
+    {% if notes|length %}
+    <div class="ai-sec03">
+      <div class="note-block">
+        <strong>Notes:</strong>
+        <p>{{ notes }}</p>
+      </div>
+    </div>
+    {% endif %}
+    <hr>
+      <p> BTR = BUTCHER, FLD = FOLKLIFT DRIVER, GEN = GENERAL LABOUR, STF = STAFF, SPT = SPOTTER, WLD = WELDER </p>
+      <p> LNL = LINE LEADER, QYC = QUALITY CONTROL, HSK = HOUSE KEEPING, JAN = JANITOR </p>
+      <p> SNR = SHIPPING AND RECEIVING, MCO = MACHINE OPERATOR, HVL = HEAVY LIFTER, LTL = LIGHT LIFTER </p>
+    </hr>
+    <p><br>Thank you for your business,<br><br>Regards,<br><br>Triune Staffing</p>
+
+</div>

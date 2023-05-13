@@ -1,0 +1,4 @@
+services:
+  triune.employeecontroller:
+    class: Drupal\triune\Controller\EmployeeController
+    arguments: ['@database', '@current_user']

@@ -1,0 +1,28 @@
+<script>
+function cancel() {
+  window.location.replace('{{ route.cancel }}');
+}
+</script>
+
+<form action="{{ route.submit }}" method="post" id="call-sheet-form" accept-charset="UTF-8">
+  {{ form.id }}
+  {{ form.user_id }}
+  {{ form.callsheet_id }}
+  {{ form.office_id }}
+  
+  {{ form.label }}
+  {{ form.date }}
+  {{ form.notes }}
+  
+  
+  
+  <div class="config-row buttons">
+  <input type="button" value="Cancel" class="button js-form-submit form-submit" onclick="cancel()" />
+  {{ form.submit }}
+  </div>
+  
+  {{ form.actions.submit }}
+  {{ form.form_build_id }}
+  {{ form.form_token }}
+  {{ form.form_id }}
+</form>

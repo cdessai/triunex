@@ -1,0 +1,43 @@
+global-styling:
+  version: 1.0
+  css:
+    base:
+      css/core.css: {}
+    layout:
+      css/layout.css: {}
+      css/source/dropbutton.component.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+
+cookie_consent:
+  version: 1.0
+  css:
+    theme:
+      '//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css': {}
+  js:
+      '//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js': {}
+
+fonts:
+  css:
+    theme:
+      '//fonts.googleapis.com/css?family=Cabin:400,600,700': { type: external, minified: true }
+      '//fonts.googleapis.com/css?family=Roboto+Condensed:700': { type: external, minified: true }
+
+font_awesome:
+  version: 5.3.1
+  css:
+    theme:
+      '//use.fontawesome.com/releases/v5.3.1/css/all.css': { type: external, attributes: { integrity: sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU, crossorigin: anonymous }, minified: true }
+    
+flexy_menu:
+  version: VERSION
+  css:
+    theme:
+      css/source/flexy-menu.css: {}
+  js:
+      js/flexy-menu-load.js: {}
+      js/flexy-menu.js: {}

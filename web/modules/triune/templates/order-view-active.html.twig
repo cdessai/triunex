@@ -1,0 +1,105 @@
+{{ attach_library('triune/order') }}
+<div {{ attributes }}>
+  <div class="app-info">
+		<div class="ai-sec01">
+			<strong class="tl-blue">Active Order</strong><br>
+			<strong>Label:</strong> {{ order.label.value }}<br>
+			<strong>Customer:</strong> {{ order.customer.label.value }}<br>
+      <strong>Address:</strong> {{ order.customer.address.value }}<br>
+      <strong>Driver:</strong> {{ order.driver }}
+    </div>
+		<div class="ai-sec02">
+      <br>
+      <strong>ID#:</strong> {{ order.id.value }}<br>
+			<strong>Date:</strong> {{ order.date.value|date("M d, Y") }}<br>
+			<strong>Time:</strong> {{ order.start_time }} - {{ order.end_time }}<br>
+      <strong>Shift:</strong> {{ order.shift.value }}<br>
+      <strong>Depart:</strong> {{ order.depart_time }}
+    </div>
+    {# Displays Supervisor Details based on shifts #}
+    <div class="ai-sec04">
+      <strong class="tl-blue">
+        Supervisor Details
+      </strong><br>
+      {% if order.shift.value == 1 %}
+        <strong>Name: {{ order.customer.s1_name.value }}</strong><br/>
+        <strong>Phone: {{ order.customer.s1_phone.value }}</strong><br/>
+        <strong>Email: {{ order.s1_email }}</strong><br/>
+      {% elseif order.shift.value == 2 %}
+        <strong>Name: {{ order.customer.s2_name.value }}</strong><br/>
+        <strong>Phone: {{ order.customer.s2_phone.value }}</strong><br/>
+        <strong>Email: {{ order.s2_email }}</strong><br/>
+      {% else %}
+        <strong>Name: {{ order.customer.s3_name.value }}</strong><br/>
+        <strong>Phone: {{ order.customer.s3_phone.value }}</strong><br/>
+        <strong>Email: {{ order.s3_email }}</strong><br/>
+      {% endif %}
+    </div>
+    {% set notes = order.notes_value|trim %}
+    {% if notes|length %}
+    <div class="ai-sec03">
+      <div class="note-block">
+        <strong>Notes:</strong>
+        <p>{{ notes }}</p>
+      </div>
+    </div>
+    {% else %}
+    <div class="ai-sec03">&nbsp;</div>
+    {% endif %}
+  </div>
+
+  <header class="app-header">
+		<div class="header-title">
+			<h2>Resources</h2>
+		</div>
+		<div class="app-links">
+      <a href="/triune/order/{{ order.id.value }}/employee/updatebulk"><i class="fas fa-check-circle">&nbsp;</i> Bulk Check In</a>
+      <a href="/triune/order/{{ order.id.value }}/update/open"><i class="fas fa-folder-open">&nbsp;</i> Reopen Order</a>
+      <a href="/triune/order/{{ order.id.value }}/edit"><i class="fas fa-edit">&nbsp;</i> Edit Order</a>
+			<a href="/triune/order/{{ order.id.value }}/update/complete"><i class="fas fa-check-circle">&nbsp;</i> Complete Order</a>
+    </div>
+	</header>
+
+  <table id="msortTable3" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th scope="col">Action</th>
+        <th scope="col">Attendance</th>
+        <th scope="col">Employee ID</th>
+        <th scope="col">Employee Name</th>
+        <th scope="col">Office</th>
+        <th scope="col">Job</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for i in 1..order.quantity.value %}
+      {% set j = i-1 %}
+      {% if variables.employee_list[j] %}
+      {% set employee = variables.employee_list[j] %}
+      <tr>
+        <td>{% if employee.present %}<a href="/triune/order/{{ order.id.value }}/employee/{{ employee.id }}/update/present/0"><i class="fas fa-user-times">&nbsp;</i> Undo</a>{% else %}<a href="/triune/order/{{ order.id.value }}/employee/{{ employee.id }}/update/present/1"><i class="fas fa-user-check">&nbsp;</i> Check In</a>{% endif %}</td>
+        <td>{% if employee.present %}Present{% else %}Absent{% endif %}</td>
+        <td>{{ employee.resource_id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.office }}</td>
+        <td>{{ employee.job }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      {% endif %}
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="config-row buttons">
+    <div class="button-back"><a href="/triune/order/list/active" class="button form-submit">Return</a></div>
+  </div>
+
+</div>

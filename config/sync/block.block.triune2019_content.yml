@@ -1,0 +1,22 @@
+uuid: 01442786-c2a4-461e-951e-336102835bc2
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - triune2019
+_core:
+  default_config_hash: 9EoWV2Lot6FVSr50t4hoKgiz1LIXYWNG-IIPYsWxBqo
+id: triune2019_content
+theme: triune2019
+region: content
+weight: -3
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

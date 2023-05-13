@@ -1,0 +1,149 @@
+{{ attach_library('triune/reports') }}
+<div {{ attributes }}>
+
+	<div id="block-projectdashboardtabs" class="contextual-region">
+      <ul class="report-tabs">
+        <li><a href="/triune/reports/difference">Difference Report</a></li>
+        <li><a href="/triune/reports/daily" class="is-active">Daily Report</a></li>
+        <li><a href="/triune/reports/weekly">Weekly Report</a></li>
+        <li><a href="/triune/notice/cr/list">Check Requests</a></li>
+        <li><a href="/triune/notice/dnr/list">DNR List</a></li>
+        <li><a href="/triune/notice/ar/list">Accident Report</a></li>
+      </ul>
+  </div>
+  
+  {% set office = variables.input_office %}
+  {% set shift = variables.input_shift %}
+  {% set customer = variables.input_customer %}
+
+  <header class="app-header">
+		<div class="header-title">
+			<h2>Daily Report for Week of {{ variables.date }}</h2>
+		</div>
+    <input type="date" id="daily-report-date" name="report-date" value="{{ variables.input_date }}"></input>
+    
+    <select id="daily-report-office" name="report-office">
+    {% for location in variables.offices %}
+        <option value="{{ location.location_id }}" {% if office == location.location_id %}{% set officename = location.label ~ " Office" %}selected="selected"{% endif %}>{{ location.label }} Office</option>
+    {% endfor %}
+    <option value="1" {% if office == 1 %}selected="selected"{% endif %}>All Offices</option>
+    </select>
+    <select id="daily-report-shift" name="report-shift">
+      <option value="0" {% if shift == 0 %}{% set shiftname = 'All Shifts' %}selected="selected"{% endif %}>All Shifts</option>
+      <option value="1" {% if shift == 1 %}{% set shiftname = '1st Shift' %}selected="selected"{% endif %}>1st Shift</option>
+      <option value="2" {% if shift == 2 %}{% set shiftname = '2nd Shift' %}selected="selected"{% endif %}>2nd Shift</option>
+      <option value="3" {% if shift == 3 %}{% set shiftname = '3rd Shift' %}selected="selected"{% endif %}>3rd Shift</option>
+    </select>
+    <select id="daily-report-customer" name="report-customer">
+        <option value="0" {% if customer == 0 %}selected="selected"{% endif %}>Select a Customer</option>
+        {% for customer_option in variables.customers %}
+        <option value="{{ customer_option.id }}" {% if customer == customer_option.id %}selected="selected"{% endif %}>{{ customer_option.label }}</option>
+        {% endfor %}
+    </select>
+  </header>
+
+
+
+  <table id="msortTable0" class="tablesorter daily-report-table" data-sorting="true">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">ID</th>
+        {% if office == 1 %}<th scope="col">Office</th>{% endif %}
+        {% if shift == 0 %}<th scope="col">Shift</th>{% endif %}
+        {% for date in variables.dates %}
+        <th scope="col">{{ date|date("D") }}<br>{{ date|date("M d") }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    {% if employee_data %}
+      {% for employee_shift in employee_data %}
+        {% for employee in employee_shift %}
+        <tr id="row-{{ employee.id }}">
+            <td id="name-{{ employee.id }}">{{ employee.name }}</td>
+            <td>{{ employee.resource_id }}</td>
+            {% if office == 1 %}<td>{{ employee.office }}</td>{% endif %}
+            {% if shift == 0 %}<td>{{ employee.value }}</td>{% endif %}
+            {% for key, date in variables.dates %}
+            {% set day = variables.weekdays[key] %}
+            <td>{{ employee[day] }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+    </tbody>
+    <tbody>
+      <tr class="tablesorter-static">
+        <td>Total</td>
+        <td></td>
+        {% if office == 1 %}<td></td>{% endif %}
+        {% if shift == 0 %}<td></td>{% endif %}
+        <td>{{ variables.total.mon }}</td>
+        <td>{{ variables.total.tue }}</td>
+        <td>{{ variables.total.wed }}</td>
+        <td>{{ variables.total.thu }}</td>
+        <td>{{ variables.total.fri }}</td>
+        <td>{{ variables.total.sat }}</td>
+        <td>{{ variables.total.sun }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+{# Printfriendly Content #}
+<div class="print-only">
+  <div class="header-title">
+    <h2>{{ variables.customer_name }}<br>
+    {{ shiftname }}<br>
+    {{ officename }}<br>
+    Week of {{ variables.date }}</h2>
+  </div>
+  <table id="msortTable2" class="tablesorter daily-report-table" data-sorting="true">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">ID</th>
+        {% if office == 1 %}<th scope="col">Office</th>{% endif %}
+        {% if shift == 0 %}<th scope="col">Shift</th>{% endif %}
+        {% for date in variables.dates %}
+        <th scope="col">{{ date|date("D") }}<br>{{ date|date("M d") }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    {% if employee_data %}
+      {% for employee_shift in employee_data %}
+        {% for employee in employee_shift %}
+          <tr id="row-{{ employee.id }}">
+            <td id="name-{{ employee.id }}">{{ employee.name }}</td>
+            <td>{{ employee.resource_id }}</td>
+            {% if office == 1 %}<td>{{ employee.office }}</td>{% endif %}
+            {% if shift == 0 %}<td>{{ employee.value }}</td>{% endif %}
+            {% for key, date in variables.dates %}
+            {% set day = variables.weekdays[key] %}
+            <td>{{ employee[day] }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+    </tbody>
+    <tbody>
+    <tr class="tablesorter-static">
+        <td>Total</td>
+        <td></td>
+        {% if office == 1 %}<td></td>{% endif %}
+        {% if shift == 0 %}<td></td>{% endif %}
+        <td>{{ variables.total.mon }}</td>
+        <td>{{ variables.total.tue }}</td>
+        <td>{{ variables.total.wed }}</td>
+        <td>{{ variables.total.thu }}</td>
+        <td>{{ variables.total.fri }}</td>
+        <td>{{ variables.total.sat }}</td>
+        <td>{{ variables.total.sun }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

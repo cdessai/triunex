@@ -1,0 +1,14 @@
+uuid: 75a5a94a-5450-4595-9874-929d5dc94443
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.triune_supervisor
+  module:
+    - user
+id: user_remove_role_action.triune_supervisor
+label: 'Remove the Triune Supervisor role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: triune_supervisor

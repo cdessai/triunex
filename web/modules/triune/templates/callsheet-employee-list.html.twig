@@ -1,0 +1,44 @@
+{{ attach_library('triune/callsheet_employee') }}
+<div{{ attributes }}>
+  {{ content }}
+  
+  <form {{ attributes }} action="{{ variables.route }}" method="post" id="callsheet-employee-list-form" accept-charset="UTF-8">
+    {{ content }}
+    {{ form.id }}
+    {{ form.callsheet_id }}
+    
+    <table  id="msortTable" class="views-table views-view-table cols-7 responsive-enabled sticky-enabled sticky-table tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th class="select-all views-field views-field-node-bulk-form" scope="col"><input type="checkbox" class="form-checkbox" title="Select all rows in this table"></th>
+        <th>Name</th>
+        <th>ID</th>
+        <th>Phone</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for employee in variables.employee_list %}
+    {% set id = employee.id %}
+    <tr>
+      <td>{{ form.employees[id] }}</td>
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.resource_id }}</td>
+      <td>{{ employee.phone }}</td>
+      <td>{{ employee.email }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    
+    
+    <div class="config-row buttons">
+    {{ form.submit }}
+    </div>
+    
+    {{ form.actions.submit }}
+    {{ form.form_build_id }}
+    {{ form.form_token }}
+    {{ form.form_id }}
+  </form>
+</div>

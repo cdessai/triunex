@@ -1,0 +1,14 @@
+uuid: 129bb877-1cae-4a83-a7ff-a3f23181d39d
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.triune_admin
+  module:
+    - user
+id: user_remove_role_action.triune_admin
+label: 'Remove the Triune Admin role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: triune_admin

@@ -1,0 +1,14 @@
+uuid: 02ed8345-a92b-4481-b271-bf6c078928b4
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.triune_admin
+  module:
+    - user
+id: user_add_role_action.triune_admin
+label: 'Add the Triune Admin role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: triune_admin

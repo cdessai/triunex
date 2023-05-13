@@ -1,0 +1,212 @@
+{{ attach_library('triune/order') }}
+<div {{ attributes }}>
+  
+  <div class="order-details">
+    <h2>Add Resources to Order</h2>
+  </div>
+
+<div class="app-info">
+    <div class="ai-sec01">
+      <strong>Label:</strong> {{ order.label.value }}<br />
+      <strong>Customer:</strong> {{ order.customer }}<br />
+      <strong>Qty Requested:</strong> {{ order.quantity.value }}
+    </div>
+    <div class="ai-sec02">
+      <strong>Date:</strong> {{ order.date.value|date("M d, Y") }}<br />
+      <strong>Shift:</strong> {{ order.shift.value }}<br />
+      {% if order.pay_rate.value %}
+      <strong>Pay Rate:</strong> $ {{ order.pay_rate.value|number_format(2, '.', ',') }}
+      {% endif %}
+    </div>
+    {% if order.notes.value is not empty %}
+    <div class="app-info">
+      <div class="ai-sec03">
+        <strong>Notes:</strong><br>
+        {{ order.notes.value }}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  <div>&nbsp;</div>
+
+  <div id="block-projectdashboardtabs" class="contextual-region">
+    <ul class="report-tabs">
+      <li><a href="/triune/order/{{ order.id.value }}/employee/add-called" class="is-active">Called On</a></li>
+      <li><a href="/triune/order/{{ order.id.value }}/employee/add-all">All Resources</a></li>
+    </ul>
+  </div>
+
+{#}
+  <form class="views-exposed-form" id="form-filter-order-list-open" action="/triune/order/{{ order_id }}/employee/add-called" method="get" accept-charset="UTF-8">
+    <div class="form--inline clearfix">
+      <div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-employee-id form-item-employee-id">
+        <label for="edit-employee-id">Employee ID</label>
+        <input data-drupal-selector="edit-employee-id" type="number" id="edit-employee-id" name="employee-id" value="{{ variables.condition.employee_id }}" size="30" maxlength="128" class="form-text">
+      </div>
+      <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-customer form-item-customer">
+        <label for="edit-customer">Work History</label>
+        <select data-drupal-selector="edit-customer" id="edit-customer" name="customer" class="form-select">
+          <option value="0"{% if variables.condition.customer_id == 0 %} selected="selected"{% endif %}>- Any -</option>
+          {% for customer in variables.customers %}
+          <option value="{{ customer.id }}"{% if variables.condition.customer_id == customer.id %} selected="selected"{% endif %}>{{ customer.label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-date form-item-date">
+        <label for="edit-date">Date</label>
+        <input type="date" id="edit-date" name="date" value="{{ variables.input_date }}"></input>
+      </div>
+      <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-shift form-item-shift">
+        <label for="edit-shift">Shift</label>
+        <select data-drupal-selector="edit-shift" id="edit-shift" name="shift" class="form-select">
+          <option value="0"{% if variables.condition.shift == '0' %} selected="selected"{% endif %}>- Any -</option>
+          <option value="1"{% if variables.condition.shift == '1' %} selected="selected"{% endif %}>1st Shift</option>
+          <option value="2"{% if variables.condition.shift == '2' %} selected="selected"{% endif %}>2nd Shift</option>
+          <option value="3"{% if variables.condition.shift == '3' %} selected="selected"{% endif %}>3rd Shift</option>
+        </select>
+      </div>
+      <div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
+        <input data-drupal-selector="edit-submit-content" type="submit" id="edit-submit-content" value="Filter" class="button js-form-submit form-submit">
+        <input data-drupal-selector="edit-reset" type="submit" id="edit-reset" name="op" value="Reset" class="button js-form-submit form-submit">
+      </div>
+    </div>
+  </form>#}
+  <form class="views-exposed-form" id="form-filter-order-employee-add-called" action="/triune/order/{{ order.id.value }}/employee/add-called" method="get" accept-charset="UTF-8">
+    <div class="form--inline clearfix">
+      <div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-employee-id form-item-employee-id">
+        <label for="edit-employee-id">Employee ID</label>
+          <input data-drupal-selector="edit-employee-id" type="text" id="edit-employee-id" name="employee-id" value="{{ variables.condition.resource_id }}" size="30" maxlength="128" class="form-text">
+      </div>
+      <div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-first-name form-item-first-name">
+        <label for="edit-first-name">First Name</label>
+          <input data-drupal-selector="edit-first-name" type="text" id="edit-first-name" name="first-name" value="{{ variables.condition.first_name }}" size="30" maxlength="128" class="form-text">
+      </div>
+      <div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-last-name form-item-last-name">
+        <label for="edit-last-name">Last Name</label>
+          <input data-drupal-selector="edit-last-name" type="text" id="edit-last-name" name="last-name" value="{{ variables.condition.last_name }}" size="30" maxlength="128" class="form-text">
+      </div>
+    </div>
+    
+    <div class="form--inline clearfix">
+      <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-customer form-item-customer">
+        <label for="edit-customer">Work History</label>
+          <select data-drupal-selector="edit-customer" id="edit-customer" name="customer" class="form-select">
+            <option value="0"{% if variables.condition.customer == 0 %} selected="selected"{% endif %}></option>
+            {% for customer in variables.customers %}
+            <option value="{{ customer.id }}"{% if variables.condition.customer_id == customer.id %} selected="selected"{% endif %}>{{ customer.label }}</option>
+            {% endfor %}
+          </select>
+      </div>
+
+      {% if variables.office_access %}
+      <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-location-id form-item-location-id">
+        <label for="edit-location-id">Office</label>
+          <select data-drupal-selector="edit-location-id" id="edit-location-id" name="location-id" class="form-select">
+          {% for location in variables.location_list %}
+            <option value="{{ location.location_id }}"{% if variables.condition.location_id == location.location_id %} selected="selected"{% endif %}>{{ location.label }}</option>
+          {% endfor %}
+          </select>
+      </div>
+      {% endif %}
+      {# Job filter Turned off until Jobs are added #}
+      {#
+      <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-job form-item-job">
+        <label for="edit-job">Job</label>
+          <select data-drupal-selector="edit-job" id="edit-job" name="job" class="form-select">
+            <option value="0"{% if variables.condition.job == 0 %} selected="selected"{% endif %}></option>
+            {% for jobid, job in variables.jobs %}
+            <option value="{{ jobid }}"{% if variables.condition.job == jobid %} selected="selected"{% endif %}>{{ job }}</option>
+            {% endfor %}
+          </select>
+      </div>
+      #}
+      <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-driver form-item-driver">
+        <label for="edit-driver">Driver</label>
+          <select data-drupal-selector="edit-driver" id="edit-driver" name="driver" class="form-select">
+            <option value=""{% if variables.condition.driver != '1' and variables.condition.driver != '0' %} selected="selected"{% endif %}></option>
+            <option value="1"{% if variables.condition.driver == '1' %} selected="selected"{% endif %}>Yes</option>
+            <option value="0"{% if variables.condition.driver == '0' %} selected="selected"{% endif %}>No</option>
+          </select>
+      </div>
+    </div>
+    <div class="form--inline clearfix">
+      <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-hire-date form-item-hire-date">
+        <label for="edit-hire-date">Hire Date</label>
+        <input type="date" id="edit-hire-date" name="hire-date" value="{{ variables.input_hire_date }}"></input>
+      </div>
+      <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-hired-after form-item-hired-after">
+        <label for="edit-hired-after">Hired After</label>
+        <input type="date" id="edit-hired-after" name="hired-after" value="{{ variables.input_hired_after }}"></input>
+      </div>
+      <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-hired-before form-item-hired-before">
+        <label for="edit-hired-before">Hired Before</label>
+        <input type="date" id="edit-hired-before" name="hired-before" value="{{ variables.input_hired_before }}"></input>
+      </div>
+      <div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
+        <input data-drupal-selector="edit-submit-content" type="submit" id="edit-submit-content" value="Filter" class="button js-form-submit form-submit">
+        <input data-drupal-selector="edit-reset" type="submit" id="edit-reset" name="op" value="Reset" class="button js-form-submit form-submit">
+      </div>
+    </div>
+  </form>
+
+
+  {% if employee_list %}
+  <form action="{{ variables.route }}" method="post" id="order-employee-add-form" accept-charset="UTF-8">
+    {{ form.order_id }}
+    
+    <table id="msortTable1" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th scope="col"><input type="checkbox" name="select-all" id="select-all" /></th>
+        <th scope="col">Employee ID</th>
+        <th scope="col">Employee Name</th>
+        <th scope="col">Hire Date</th>
+        <th scope="col">Work History</th>
+        <th scope="col">Office</th>
+        <th scope="col">Job</th>
+        <th scope="col">Driver</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+    {% for key, employee in employee_list %}
+    <tr>
+      <td>{% if form.employees[key] %}{{ form.employees[key] }}{% else %}DNR{% endif %}</td>
+      <td>{{ employee.resource_id }}</td>
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.hire_date }}</td>
+      <td>{{ employee.customer }}</td>
+      <td>{{ employee.office }}</td>
+      <td>{{ employee.job }}</td>
+      <td>{{ employee.driver }}</td>
+    </tr>
+    {% endfor %}
+    
+    </tbody>
+  </table>
+    
+  <div class="config-row buttons">
+  	<div class="button-back"><input type="button" value="Cancel" class="button js-form-submit" onClick="window.location.href = '/triune/order/{{ order.id.value }}/view';"></div>
+  	{{ form.submit }}
+  </div>
+  {{ form.actions.submit }}
+  {{ form.form_build_id }}
+  {{ form.form_token }}
+  {{ form.form_id }}
+  </form>
+
+  <div class="side-area" style="float:right">
+  {% if variables.page != 0 %}
+  <a href="/triune/order/{{ order_id }}/employee/add-called?{{ variables.queries }}page={{ variables.condition.page - 1 }}">Last</a>
+  {% endif %}
+  <strong>{{ variables.condition.page + 1 }}</strong>
+  {% if not variables.lastpage %}
+  <a href="/triune/order/{{ order_id }}/employee/add-called?{{ variables.queries }}page={{ variables.condition.page + 1 }}">Next</a>
+  {% endif %}
+  </div>
+
+  {% else %}
+  <p>No resources marked as available, view <a href="/triune/callsheet/list">Call Sheets</a> to manage employee availability</p>
+  {% endif %}
+</div>

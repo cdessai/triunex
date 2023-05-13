@@ -1,0 +1,28 @@
+#pf-title {
+    display: none !important;
+}
+#pf-src {
+    display: none !important;
+}
+tr {
+    border: none !important;
+    border-bottom: none !important;
+}
+#pf-body table {
+    border-collapse: separate !important;
+}
+td.pf-signature-line {
+    border-bottom: solid 1px black !important;
+    width: 30% !important;
+}
+td.pf-time-line {
+    border-bottom: solid 1px black !important;
+    width: 10% !important;
+    margin: 1px !important;
+}
+td.pf-id-line {
+    width: 15% !important;
+}
+td.added-to-list1 {
+    border: solid 1px black !important;
+}

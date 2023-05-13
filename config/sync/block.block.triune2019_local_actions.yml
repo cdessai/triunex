@@ -1,0 +1,20 @@
+uuid: 271cac3a-4197-4446-852d-b8c49189dd2d
+langcode: en
+status: true
+dependencies:
+  theme:
+    - triune2019
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: triune2019_local_actions
+theme: triune2019
+region: content
+weight: -4
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

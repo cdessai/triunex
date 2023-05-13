@@ -1,0 +1,14 @@
+uuid: c9593f8c-d9a9-44be-ae48-977107fb9d0c
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.access_all_offices
+  module:
+    - user
+id: user_add_role_action.access_all_offices
+label: 'Add the Access All Offices role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: access_all_offices

@@ -1,0 +1,41 @@
+{{ attach_library('triune/callsheet') }}
+<script>
+  confirmation = function() {
+    return confirm("Are you sure you want to delete call sheet?");
+  }
+</script>
+<div {{ attributes }}>
+  
+  <header class="app-header">
+		<div class="header-title">
+			<h2>Call Sheets</h2>
+		</div>
+		<div class="app-links">
+			<a href="/triune/callsheet/add"><i class="fas fa-plus-circle">&nbsp;</i> Add a Call Sheet</a>
+		</div>
+	</header>
+  
+  <table id="msortTable" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th scope="col">Label</th>
+        <th scope="col">Week of</th>
+        <th scope="col">Notes</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for callsheet in callsheets %}
+    <tr>
+      <td>{{ callsheet.label.value }}</td>
+      <td>{{ callsheet.date.value|date("M d, Y") }}</td>
+      <td>{{ callsheet.notes.value }}</td>
+      <td class="action-links al-xtra">
+				<a href="/triune/callsheet/{{ callsheet.id.value }}/view"><i class="far fa-eye">&nbsp;</i> View</a>&nbsp;&nbsp;
+				<a href="/triune/callsheet/{{ callsheet.id.value }}/delete" onclick="return confirmation()"><i class="fas fa-minus-circle">&nbsp;</i> Delete</a>
+			</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>

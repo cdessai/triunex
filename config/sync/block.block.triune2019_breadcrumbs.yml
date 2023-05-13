@@ -1,0 +1,22 @@
+uuid: 29c27199-5970-4bca-a61d-3c1469af1de5
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - triune2019
+_core:
+  default_config_hash: oXUb3JZR2WW5VOdw4HrhRicCsq51mCgLfRyvheG68ck
+id: triune2019_breadcrumbs
+theme: triune2019
+region: disabled_blocks
+weight: -3
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

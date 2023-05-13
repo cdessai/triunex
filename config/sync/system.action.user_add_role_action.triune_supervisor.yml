@@ -1,0 +1,14 @@
+uuid: 75d0962e-64ba-4b5b-9a42-99fc36811c7f
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.triune_supervisor
+  module:
+    - user
+id: user_add_role_action.triune_supervisor
+label: 'Add the Triune Supervisor role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: triune_supervisor

@@ -1,0 +1,58 @@
+{{ attach_library('triune/reports') }}
+<script>
+  confirmation = function() {
+    return confirm("Are you sure you want to delete record?");
+  }
+</script>
+<div {{ attributes }}>
+
+	<div id="block-projectdashboardtabs" class="contextual-region">
+      <ul class="report-tabs">
+        <li><a href="/triune/reports/difference">Difference Report</a></li>
+        <li><a href="/triune/reports/daily">Daily Report</a></li>
+        <li><a href="/triune/reports/weekly">Weekly Report</a></li>
+        <li><a href="/triune/notice/cr/list"{% if type == 'cr' %} class="is-active"{% endif %}>Check Requests</a></li>
+        <li><a href="/triune/notice/dnr/list"{% if type == 'dnr' %} class="is-active"{% endif %}>DNR List</a></li>
+        <li><a href="/triune/notice/ar/list"{% if type == 'ar' %} class="is-active"{% endif %}>Accident Report</a></li>
+      </ul>
+  </div>
+  
+  <header class="app-header">
+		<div class="header-title">
+			<h2>{{ label }}</h2>
+		</div>
+		<div class="app-links">
+			<a href="/triune/notice/{{ type }}/add"><i class="fas fa-plus-circle">&nbsp;</i> Add Notice</a>
+		</div>
+	</header>
+  
+  <table id="msortTable0" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Resource ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Office</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Message</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for notice in notice_list %}
+    <tr>
+      <td>{{ notice.date }}</td>
+      <td>{{ notice.employee_id }}</td>
+      <td>{{ notice.employee_name }}</td>
+      <td>{{ notice.office }}</td>
+      <td>{{ notice.customer }}</td>
+      <td>{{ notice.label }}</td>
+      <td>
+				<a href="/triune/notice/{{ type }}/{{ notice.id }}/edit"><i class="far fa-eye">&nbsp;</i> View</a>&nbsp;&nbsp;
+				<a href="/triune/notice/{{ notice.id }}/delete" onclick="return confirmation()"><i class="fas fa-minus-circle">&nbsp;</i> Delete</a>
+			</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>

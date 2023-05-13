@@ -1,0 +1,62 @@
+{{ attach_library('triune/jobrate') }}
+<div {{ attributes }}>
+  
+  <div class="app-header">
+    <h3>Manage Payrolls</h3>
+    
+    <div class="app-links">
+      <a href="/triune/jobrate/add">Add Payroll</a>
+    </div>
+  </div>
+    <form class="views-exposed-form" id="form-filter-jobrate-list" action="/triune/payroll/list" method="get" accept-charset="UTF-8">
+        <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-job form-item-job">
+        <label for="edit-job">Job</label>
+          <select data-drupal-selector="edit-job" id="edit-job" name="job" class="form-select">
+            <option value="0"{% if variables.condition.job == 0 %} selected="selected"{% endif %}></option>
+            {% for jobid, job in variables.jobs %}
+            <option value="{{ jobid }}"{% if variables.condition.job == jobid %} selected="selected"{% endif %}>{{ job }}</option>
+            {% endfor %}
+          </select>
+      </div>
+      <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-customer form-item-customer">
+        <label for="edit-customer">Customer</label>
+        <select data-drupal-selector="edit-customer" id="edit-customer" name="customer" class="form-select">
+          <option value="0"{% if variables.condition.customer_id == 0 %} selected="selected"{% endif %}>- Any -</option>
+          {% for customer in variables.customers %}
+          <option value="{{ customer.id }}"{% if variables.condition.customer_id == customer.id %} selected="selected"{% endif %}>{{ customer.label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
+        <input data-drupal-selector="edit-submit-content" type="submit" id="edit-submit-content" value="Filter" class="button js-form-submit form-submit">
+        <input data-drupal-selector="edit-reset" type="submit" id="edit-reset" name="op" value="Reset" class="button js-form-submit form-submit">
+      </div>
+    </form>
+
+  <table id="msortTable" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th specifier="customer_name">Last Update</th>
+        <th specifier="office">Customer</th>
+        <th specifier="emails_1">Position</th>
+        <th specifier="emails_2">Rate</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for key, jobrate in jobrate_list %}
+    <tr>
+      <td>{{ jobrate.name }}</td>
+      <td>{{ jobrate.office }}</td>
+      <td>{{ jobrate.s1_name }}</td>
+      <td>{{ jobrate.s2_name }}</td>
+      <td>{{ jobrate.s3_name }}</td>
+      <td>{{ jobrate.address }}</td>
+      <td><a href="/triune/jobrate/{{ customer.id }}/edit">Edit</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  
+
+</div>

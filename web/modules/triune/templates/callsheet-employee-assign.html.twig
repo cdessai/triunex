@@ -1,0 +1,70 @@
+{{ attach_library('triune/callsheet_employee') }}
+<div {{ attributes }}>
+  
+  <div class="order-details">
+    <h2>Assign Resource to an Order</h2>
+  </div>
+  
+  <div class="app-info">
+    <div class="ai-sec01">
+      <strong>Employee:</strong> {{ variables.employee }}<br>
+      <strong>Date:</strong> {{ variables.date|date("M d, Y") }}<br>
+      <strong>Shift:</strong> {% if variables.shift %}{{ variables.shift }}{% else %}Any{% endif %}
+    </div>
+  </div>
+  
+  {% if order_list %}
+  <form action="{{ variables.route }}" method="post" id="callsheet-employee-assign-form" accept-charset="UTF-8">
+    
+    
+    <table id="msortTable" class="tablesorter" data-sorting="true">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Label</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Office</th>
+        <th scope="col">Shift</th>
+        <th scope="col">Position</th>
+        <th scope="col">Pay Rate</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+    {% for key, order in order_list %}
+    <tr>
+      <td>{% if form.orders[key] %}{{ form.orders[key] }}{% else %}
+        {% if order.dnr %}DNR{% elseif order.full %}Full{% endif %}
+        {% endif %}</td>
+      <td>{{ order.label }}</td>
+      <td>{{ order.customer }}</td>
+      <td>{{ order.office }}</td>
+      <td>{{ order.shift }}</td>
+      <td>{{ order.position }}</td>
+      <td>{% if key != 0 %}$ {{ order.pay_rate|number_format(2, '.', ',') }}{% endif %}</td>
+    </tr>
+    {% endfor %}
+    
+    </tbody>
+  </table>
+    
+  <div class="config-row buttons">
+  	<div class="button-back"><input type="button" value="Cancel" class="button js-form-submit" onClick="window.location.href = '/triune/callsheet/{{ variables.callsheet_id }}/employee/{{ variables.employee_id }}/edit';"></div>
+  	{{ form.submit }}
+  </div>
+  
+  <div style="display:none">
+  {{ form.callsheet_id }}
+  {{ form.employee_id }}
+  {{ form.date }}
+  {{ form.shift }}
+  </div>
+  {{ form.actions.submit }}
+  {{ form.form_build_id }}
+  {{ form.form_token }}
+  {{ form.form_id }}
+  </form>
+  {% else %}
+  <p>No resources marked as available, <a href="/triune/callsheet/list">view call sheets to manage order availability</a></p>
+  {% endif %}
+</div>

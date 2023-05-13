@@ -1,0 +1,25 @@
+uuid: eab219e4-b91f-43a0-ba2f-bb4fa11f98c0
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - triune2019
+_core:
+  default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
+id: triune2019_branding
+theme: triune2019
+region: disabled_blocks
+weight: -7
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

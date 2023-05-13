@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * Implement logo.png from theme.
+ **/
+function triune2019_preprocess_page(&$variables) {
+  $variables['logopath'] = '/' . drupal_get_path('theme','triune2019') . '/logo.png';
+}

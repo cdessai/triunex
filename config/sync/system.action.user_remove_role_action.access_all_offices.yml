@@ -1,0 +1,14 @@
+uuid: 6d02008a-a4ef-4ffe-ad86-aeb6999a604b
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.access_all_offices
+  module:
+    - user
+id: user_remove_role_action.access_all_offices
+label: 'Remove the Access All Offices role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: access_all_offices
