@@ -41,6 +41,7 @@
         "phpstan/phpstan": "^1.9",
         "phpstan/extension-installer": "^1.2",
         "mglaman/phpstan-drupal": "^1.1",
-        "phpstan/phpstan-deprecation-rules": "^1.1"
+        "phpstan/phpstan-deprecation-rules": "^1.1",
+        "drupal/devel_entity_updates": "^4.1"
     }
 }

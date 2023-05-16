@@ -406,47 +406,6 @@ triune.customer.delete:
   requirements:
     _permission: 'edit_customers'
 
-# JobRate routes
-triune.jobrate.list:
-  path: '/triune/payroll/list'
-  defaults:
-    _controller: '\Drupal\triune\Controller\JobRateController::listJobRates'
-    _title: ''
-  requirements:
-    _permission: 'access_application'
-
-triune.jobrate.add:
-  path: '/triune/jobrate/add'
-  defaults:
-    _controller: '\Drupal\triune\Controller\JobRateController::addJobRate'
-    _title: ''
-  requirements:
-    _permission: 'access_application'
-
-triune.jobrate.edit:
-  path: '/triune/jobrate/{jobrate_id}/edit'
-  defaults:
-    _controller: '\Drupal\triune\Controller\JobRateController::editJobRate'
-    _title: ''
-  requirements:
-    _permission: 'access_application'
-
-triune.jobrate.view:
-  path: '/triune/jobrate/{jobrate_id}/view'
-  defaults:
-    _controller: '\Drupal\triune\Controller\JobRateController::viewJobRate'
-    _title: ''
-  requirements:
-    _permission: 'access_application'
-
-triune.jobrate.delete:
-  path: '/triune/jobrate/{jobrate_id}/delete'
-  defaults:
-    _controller: '\Drupal\triune\Controller\JobRateController::deleteJobRate'
-    _title: ''
-  requirements:
-    _permission: 'access_application'
-
 ##############
 # AJAX Calls #
 ##############
@@ -736,35 +695,62 @@ triune.entity.callsheet_employee.delete:
   requirements:
     _permission: 'access_application'
 
-# JobRate management pages.
-triune.entity.jobrate.collection:
-  path: '/triune/entity/jobrate/list'
+#################
+# Payroll routes
+#################
+
+triune.payroll.list:
+  path: '/triune/payroll/list'
   defaults:
-    _entity_list: 'triune_jobrate'
-    _title: 'PayRoll List'
+    _controller: '\Drupal\triune\Controller\PayrollController::listPayrolls'
+    _title: 'Payrolls'
   requirements:
     _permission: 'access_application'
 
-triune.entity.jobrate.add:
-  path: '/triune/entity/jobrate/add'
+triune.payroll.view:
+  path: '/triune/payroll/{payroll}'
   defaults:
-    _entity_form: 'triune_jobrate.add'
-    _title: 'Add a PayRoll'
+    _controller: '\Drupal\triune\Controller\PayrollController::viewPayroll'
+    _title: 'View Payroll'
+  requirements:
+    _permission: 'access_application'
+  options:
+    parameters:
+      payroll:
+        type: entity:triune_payroll
+
+triune.payroll.delete:
+  path: '/triune/payroll/{payroll}/delete'
+  defaults:
+    _controller: '\Drupal\triune\Controller\PayrollController::deletePayroll'
+    _title: 'Delete Payroll'
+  requirements:
+    _permission: 'delete_payroll'
+  options:
+    parameters:
+      payroll:
+        type: entity:triune_payroll
+
+triune.entity.payroll.collection:
+  path: '/triune/entity/payroll/list'
+  defaults:
+    _entity_list: 'triune_payroll'
+    _title: 'Payroll List'
   requirements:
     _permission: 'access_application'
 
-triune.entity.jobrate.edit:
-  path: '/triune/entity/jobrate/{triune_jobrate}/edit'
+triune.entity.payroll.add:
+  path: '/triune/entity/payroll/add'
   defaults:
-    _entity_form: 'triune_jobrate.edit'
-    _title: 'PayRoll Details'
+    _entity_form: 'triune_payroll.add'
+    _title: 'Add a Payroll'
   requirements:
-    _permission: 'access_application'
+     _permission: 'access_application'
 
-triune.entity.jobrate.delete:
-  path: '/triune/entity/jobrate/{triune_jobrate}/delete'
+triune.payroll_settings:
+  path: '/admin/config/triune/payroll_settings'
   defaults:
-    _entity_form: 'triune_jobrate.delete'
-    _title: 'Delete PayRoll'
+    _form: '\Drupal\triune\Form\PayrollSettingsForm'
+    _title: 'Payroll settings'
   requirements:
-    _permission: 'access_application'
+    _permission: 'administer_payroll'
