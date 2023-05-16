@@ -52,6 +52,8 @@ function triune_uninstall() {
   $db_connection->schema()->dropTable('triune_order_employee');
   $db_connection->schema()->dropTable('triune_callsheet');
   $db_connection->schema()->dropTable('triune_callsheet_employee');
+  $db_connection->schema()->dropTable('triune_jobrate');
+  $db_connection->schema()->dropTable('triune_employee_notes');
 }
 
 /**
@@ -800,13 +802,6 @@ function triune_schema() {
         'length' => 255,
         'not null' => TRUE,
       ],
-      'label' => [
-        'description' => 'JobRate Label',
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
-      ],
       'user_id' => [
         'description' => '',
         'type' => 'int',
@@ -818,13 +813,6 @@ function triune_schema() {
         'type' => 'int',
         'length' => 11,
         'not null' => TRUE,
-      ],
-      'status' => [
-        'description' => 'Status',
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
       ],
       'position_name' => [
         'description' => '',
@@ -840,7 +828,7 @@ function triune_schema() {
         'not null' => FALSE,
         'default' => '',
       ],
-      'pay_rate' => [
+      'rate' => [
         'description' => '',
         'type' => 'varchar',
         'length' => 255,
@@ -862,6 +850,46 @@ function triune_schema() {
     ],
     'primary key' => ['id'],
   ];
+  
+  $schema['triune_employee_notes'] = [
+      'description' => t('Employee notes data'),
+      'fields' => [
+          'id' => [
+              'description' => t('Employee notes ID'),
+              'type' => 'serial',
+              'not null' => TRUE,
+              'unsigned' => TRUE,
+          ],
+          'employee_id' => [
+              'description' => t('The employee entity ID'),
+              'type' => 'int',
+              'length' => 11,
+              'not null' => TRUE,
+              'unsigned' => TRUE,
+          ],
+          'user_id' => [
+              'description' => t('The user who made the entry'),
+              'type' => 'int',
+              'length' => 11,
+              'not null' => TRUE,
+              'unsigned' => TRUE,
+          ],
+          'note' => [
+              'description' => t('Text content for the note'),
+              'type' => 'text',
+              'size' => 'big',
+              'not null' => TRUE,
+          ],
+          'created' => [
+              'description' => t('When this item was created'),
+              'type' => 'int',
+              'length' => 11,
+              'not null' => TRUE,
+          ],
+      ],
+      'primary key' => ['id'],
+  ];
+  
   return $schema;
 }
 
@@ -1065,4 +1093,51 @@ function triune_update_9500() {
   $definition_manager->installFieldStorageDefinition('s3_phone', $bundle_of, $bundle_of, $new_field7);
   $definition_manager->installFieldStorageDefinition('tsc_phone', $bundle_of, $bundle_of, $new_field8);
   $definition_manager->installFieldStorageDefinition('p_phone', $bundle_of, $bundle_of, $new_field9);
+}
+
+/**
+ * Create table: "triune_employee_notes".
+ */
+function triune_update_9501() {
+    $schema['triune_employee_notes'] = [
+        'description' => t('Employee notes data'),
+        'fields' => [
+            'id' => [
+                'description' => t('Employee notes ID'),
+                'type' => 'serial',
+                'not null' => TRUE,
+                'unsigned' => TRUE,
+            ],
+            'employee_id' => [
+                'description' => t('The employee entity ID'),
+                'type' => 'int',
+                'length' => 11,
+                'not null' => TRUE,
+                'unsigned' => TRUE,
+            ],
+            'user_id' => [
+                'description' => t('The user who made the entry'),
+                'type' => 'int',
+                'length' => 11,
+                'not null' => TRUE,
+                'unsigned' => TRUE,
+            ],
+            'note' => [
+                'description' => t('Text content for the note'),
+                'type' => 'text',
+                'size' => 'big',
+                'not null' => TRUE,
+            ],
+            'created' => [
+                'description' => t('When this item was created'),
+                'type' => 'int',
+                'length' => 11,
+                'not null' => TRUE,
+            ],
+        ],
+        'primary key' => ['id'],
+    ];
+    
+    $db_connection = \Drupal::database();
+    $db_connection->schema()->createTable('triune_employee_notes', $schema['triune_employee_notes']);
 }

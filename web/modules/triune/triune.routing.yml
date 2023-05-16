@@ -754,3 +754,39 @@ triune.payroll_settings:
     _title: 'Payroll settings'
   requirements:
     _permission: 'administer_payroll'
+
+triune.employee.note.list:
+  path: '/triune/employee/{employee}/note/list'
+  defaults:
+    _controller: '\Drupal\triune\Controller\EmployeeController::listNotes'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+  options:
+    parameters:
+      employee:
+        type: entity:triune_employee
+
+triune.employee.note.add:
+  path: '/triune/employee/{employee}/note/add'
+  defaults:
+    _controller: '\Drupal\triune\Controller\EmployeeController::addNote'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+  options:
+    parameters:
+      employee:
+        type: entity:triune_employee
+
+triune.employee.note.delete:
+  path: '/triune/employee/{employee}/note/{note_id}/delete'
+  defaults:
+    _controller: '\Drupal\triune\Controller\EmployeeController::deleteNote'
+    _title: ''
+  requirements:
+    _permission: 'access_application'
+  options:
+    parameters:
+      employee:
+        type: entity:triune_employee

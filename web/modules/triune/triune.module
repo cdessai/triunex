@@ -357,6 +357,13 @@ function triune_theme($existing, $type, $theme, $path) {
           'payroll_id' => NULL,
       ],
     ],
+    'employee_notes_list' => [
+      'variables' => [
+          'employee' => NULL,
+          'variables' => [],
+          'notes' => [],
+      ],
+    ],
   ];
 }
 
