@@ -1,0 +1,38 @@
+<h3>Resource Notes: {{ employee.last_name.value }}, {{ employee.first_name.value }}</h3>
+
+<div class="app-links">
+    {% if variables.resource_access %}
+        <a id="employee-note-add" 
+            class="use-ajax"
+            data-dialog-options="{&quot;width&quot;:800}"
+            data-dialog-type="modal"
+            href="/triune/employee/{{ employee.id.value }}/note/add">
+            <i class="fa fa-plus-circle" aria-hidden="true">&nbsp;</i> Add a Note</a>
+    {% endif %}
+</div>
+
+<table id="msortTable" class="tablesorter" data-sorting="false">
+    <thead>
+      <tr>
+        <th specifier="created_date">Entry Date</th>
+        <th specifier="user">User</th>
+        <th specifier="note">Notes</th>
+        {% if variables.resource_access %}<th>Actions</th>{% endif %}
+      </tr>
+    </thead>
+    <tbody>
+        {% for note in notes %}
+        <tr>
+          <td>{{ note.created|date('m/d/Y') }}</td>
+          <td>{{ note.author.getAccountName() }}</td>
+          <td>{{ note.content }}</td>
+          {% if variables.resource_access %}
+            <td>
+                <a href="/triune/employee/{{ employee.id.value }}/note/{{ note.id }}/delete"
+                    onclick="if(!confirm('Confirm Delete?')){return false;}"><i class="fa fa-minus-circle"></i> Delete</a>
+            </td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -131,7 +131,12 @@
     {% for key, employee in employee_list %}
     <tr>
       <td>{{ employee.resource_id }}</td>
-      <td>{{ employee.name }}</td>
+      <td>
+        <a href="/triune/employee/{{ employee.id }}/note/list"
+            class="use-ajax"
+            data-dialog-options="{&quot;width&quot;:800}"
+            data-dialog-type="modal">{{ employee.name }}</a>
+      </td>
       <td>{{ employee.office }}</td>
       <td>{{ employee.hire_date }}</td>
       <td>{% if employee.shift %}{{ employee.shift }}{% endif %}</td>

@@ -19,11 +19,16 @@ use Drupal\triune\Entity\OrderEmployee;
 use Drupal\triune\Entity\Office;
 use Drupal\triune\Entity\Customer;
 use Drupal\triune\Controller\AscentisAPIController;
+use Drupal\triune\Entity\EmployeeInterface;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\OpenModalDialogCommand;
+use Symfony\Component\HttpFoundation\Request;
+use Drupal\Core\Controller\ControllerBase;
 
 /**
  * Controller routines for triune_employee page routes.
  */
-class EmployeeController implements ContainerInjectionInterface
+class EmployeeController extends ControllerBase implements ContainerInjectionInterface
 {
     
     /**
@@ -31,7 +36,7 @@ class EmployeeController implements ContainerInjectionInterface
      *
      * @var \Drupal\Core\Database\Connection;
      */
-    protected $database; 
+    protected $database;
 
 
     /**
@@ -78,7 +83,7 @@ class EmployeeController implements ContainerInjectionInterface
             $container->get('current_user')
         );
         
-    }    
+    }
     
     
     public function addEmployee()
@@ -88,7 +93,7 @@ class EmployeeController implements ContainerInjectionInterface
         
         $form = \Drupal::formBuilder()->getForm('Drupal\triune\Form\EmployeeForm');
         
-        /** 
+        /**
          * Send data to twig...
          */
         return array(
@@ -110,7 +115,7 @@ class EmployeeController implements ContainerInjectionInterface
         
         $form = \Drupal::formBuilder()->getForm('Drupal\triune\Form\EmployeeForm', $employee_id);
                 
-        /** 
+        /**
          * Send data to twig...
          */
         return array(
@@ -129,7 +134,7 @@ class EmployeeController implements ContainerInjectionInterface
         
         \Drupal::service('page_cache_kill_switch')->trigger();
         
-        /** 
+        /**
          * Send data to twig...
          */
         return array(
@@ -311,7 +316,7 @@ class EmployeeController implements ContainerInjectionInterface
         ];
         
       
-        /** 
+        /**
          * Send data to twig
          */
         return array(
@@ -320,7 +325,7 @@ class EmployeeController implements ContainerInjectionInterface
           '#variables' => $variables,
           '#cache' => ['max-age' => 0,],
           '#markup' => time(),
-        );    
+        );
       
     }
     
@@ -365,7 +370,7 @@ class EmployeeController implements ContainerInjectionInterface
         
         $form = \Drupal::formBuilder()->getForm('Drupal\triune\Form\OrderAddEmployeeForm', $order_id, $employee_list, $order_employee_list);
         
-        /** 
+        /**
          * Send data to twig
          */
         return array(
@@ -374,7 +379,7 @@ class EmployeeController implements ContainerInjectionInterface
           '#variables' => $variables,
           '#cache' => ['max-age' => 0,],
           '#markup' => time(),
-        );  
+        );
       
     }
     
@@ -401,7 +406,7 @@ class EmployeeController implements ContainerInjectionInterface
         $data = $ascentis->getEmployee($resource_id);
         $content = json_encode($data->data[0]->employee);
       
-        /** 
+        /**
          * Send data to twig...
          */
         return array(
@@ -525,5 +530,74 @@ class EmployeeController implements ContainerInjectionInterface
             }
         }
         echo($i);exit();
+    }
+    
+    public function listNotes(EmployeeInterface $employee) {
+        $variables = [
+            'resource_access' => $this->user->hasPermission('edit_employees'),
+        ];
+        
+        $query = $this->database->select('triune_employee_notes', 'en');
+        $query->fields('en', ['id', 'user_id', 'note', 'created']);
+        $query->condition('employee_id', $employee->id());
+        $results = $query->execute()->fetchAll();
+        $notes = [];
+        foreach ($results as $row) {
+            $user = User::load($row->user_id);
+            $notes[] = [
+                'id' => $row->id,
+                'author' => $user,
+                'content' => $row->note,
+                'created' => $row->created,
+            ];
+        }
+        
+        return [
+            '#theme' => 'employee_notes_list',
+            '#employee' => $employee,
+            '#variables' => $variables,
+            '#notes' => $notes,
+            '#cache' => ['max-age' => 0],
+            '#attached' => [
+                'library' => [
+                    'core/drupal.ajax',
+                    'core/drupal.dialog.ajax',
+                ],
+            ],
+        ];
+    }
+    
+    public function addNote(EmployeeInterface $employee) {
+        $form = \Drupal::formBuilder()->getForm(\Drupal\triune\Form\EmployeeNoteForm::class, $employee);
+        $tpl =<<<TWIG
+<h3>Add note for employee: {{ employee.last_name.value }}, {{ employee.first_name.value }}</h3>
+{{ form }}
+TWIG;
+        return [
+            '#type' => 'inline_template',
+            '#template' => $tpl,
+            '#context' => [
+                'employee' => $employee,
+                'form' => $form,
+            ],
+            '#cache' => ['max-age' => 0],
+            '#attached' => [
+                'library' => [
+                    'core/drupal.ajax',
+                    'core/drupal.dialog.ajax',
+                ],
+            ],
+        ];
+    }
+    
+    public function deleteNote(EmployeeInterface $employee, $note_id) {
+        \Drupal::service('page_cache_kill_switch')->trigger();
+        
+        $nbr_deleted = $this->database->delete('triune_employee_notes')
+            ->condition('id', $note_id)
+            ->execute();
+        
+        \Drupal::messenger()->addStatus($this->t('Deleted note ID: @id', ['@id' => $note_id]));
+        return $this->redirect('triune.employee.note.list', ['employee' => $employee->id()]);
     }
 }
