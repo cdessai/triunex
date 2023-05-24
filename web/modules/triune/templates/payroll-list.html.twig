@@ -48,7 +48,7 @@
     <tbody>
     {% for key,item in items %}
     <tr>
-      <td>{{ item.changed.value }}</td>
+      <td>{{ item.changed.value|date('Y-m-d') }}</td>
       <td>{{ item.customer_id.entity.label.value }}</td>
       <td>{{ item.position_name.value }}</td>
       <td>{{ item.rate.value }}</td>
