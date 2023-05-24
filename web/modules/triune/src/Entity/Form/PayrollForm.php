@@ -12,6 +12,7 @@ use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Entity\ContentEntityConfirmFormBase;
 use Drupal\Core\Url;
 use Drupal\triune\Entity\Payroll;
+use Drupal\triune\Entity\Customer;
 
 /**
  * Order form.
@@ -27,8 +28,18 @@ class PayrollForm extends ContentEntityForm
     public function buildForm(array $form, FormStateInterface $form_state)
     {
         $form = parent::buildForm($form, $form_state);
-        $entity = $this->entity;
         
+        // manipulate customer dropdown
+        $customer_ids = $form['customer_id']['widget']['#options'];
+        unset($customer_ids['_none']);
+        $customers = \Drupal::entityTypeManager()->getStorage('triune_customer')->loadMultiple($customer_ids);
+        $options = [];
+        foreach ($customers as $customer) {
+            $options[$customer->id()] = $customer->label->value;
+        }
+        $form['customer_id']['widget']['#options'] = ['_none' => '- None -'] + $options;
+        
+        $entity = $this->entity;
         return $form;
     }
     
