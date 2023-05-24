@@ -102,8 +102,8 @@ class PayrollListBuilder extends EntityListBuilder
     public function buildRow(EntityInterface $entity)
     {
         $row['id'] = $entity->id->value;
-        $row['changed'] = $entity->changed->value;
-        $row['customer_id'] = $entity->customer_id->target_id;
+        $row['changed'] = date('Y-m-d H:i:s', $entity->changed->value);
+        $row['customer_id'] = $entity->customer_id->entity->label->value;
         $row['position_name'] = $entity->position_name->value;
         $row['rate'] = $entity->rate->value;
 

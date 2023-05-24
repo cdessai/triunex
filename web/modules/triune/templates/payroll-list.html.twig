@@ -5,7 +5,7 @@
     <h3>Manage Payrolls</h3>
     
     <div class="app-links">
-      <a href="/triune/jobrate/add">Add Payroll</a>
+      <a href="/triune/payroll/add">Add Payroll</a>
     </div>
   </div>
 {#
@@ -49,7 +49,7 @@
     {% for key,item in items %}
     <tr>
       <td>{{ item.changed.value }}</td>
-      <td>{{ item.customer_id.target_id }}</td>
+      <td>{{ item.customer_id.entity.label.value }}</td>
       <td>{{ item.position_name.value }}</td>
       <td>{{ item.rate.value }}</td>
       <td>
